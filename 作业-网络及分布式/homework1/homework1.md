@@ -4,13 +4,13 @@
 
 `ping 183.232.231.172`
 
-![ping baidu](resource\ping_baidu.png)
+![ping baidu](resource/ping_baidu.png)
 
 ## 2. tracert 一个服务器
 
 `tracert 183.232.231.172`
 
-![tracert baidu](resource\tracert_baidu.png)
+![tracert baidu](resource/tracert_baidu.png)
 
 * **Note:**
 
