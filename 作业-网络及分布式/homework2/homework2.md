@@ -2,7 +2,7 @@
 
 ## P2
 
-![P2](\resource\P2.png)
+![P2](resource/P2.png)
 
 **Ans:**
 
@@ -10,7 +10,7 @@ N\*(L/R) + (P-1)\*(L/R) = (N+P-1)*(L/R)
 
 ## P3
 
-![P3](\resource\P3.jpg)
+![P3](resource/P3.jpg)
 
 **Ans:**
 
@@ -20,7 +20,7 @@ b. 不需要。因为应用程序传输速率总和小于每条链路的各自�
 
 ## P5
 
-![P5](\resource\P5.png)
+![P5](resource/P5.png)
 
 **Ans:**
 
@@ -38,7 +38,7 @@ b. 传播时延：同上，90 min；
 
 ## P6
 
-![P6](\resource\P6.png)
+![P6](resource/P6.png)
 
 **Ans:**
 
@@ -58,7 +58,7 @@ g. m / s = L / R，可得 m = 536 km
 
 ## P7
 
-![P7](\resource\P7.png)
+![P7](resource/P7.png)
 
 **Ans:**
 
