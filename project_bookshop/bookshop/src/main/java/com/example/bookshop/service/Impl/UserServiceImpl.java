@@ -2,7 +2,7 @@ package com.example.bookshop.service.Impl;
 
 import com.example.bookshop.dao.UserDao;
 import com.example.bookshop.domain.User;
-import com.example.bookshop.exception.AddUserException;
+import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.UserService;
@@ -20,14 +20,14 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void add(User user) throws AddUserException {
+    public void add(User user) throws AddException {
         if (user == null
-                || StringFormatUtil.isEmpty(user.getId())
-                || StringFormatUtil.isEmpty(user.getName())
-                || StringFormatUtil.isEmpty(user.getPassword())
-                || StringFormatUtil.isEmpty(user.getTel())
-                || userDao.findOneById(user.getId()) != null) {
-            throw new AddUserException("添加错误：id为空/id已被注册/姓名为空/密码为空/手机号为空");
+        || StringFormatUtil.hasEmpty(user.getId())
+        || userDao.findOneById(user.getId()) != null
+        || StringFormatUtil.hasEmpty(user.getName())
+        || StringFormatUtil.hasEmpty(user.getPassword())
+        || StringFormatUtil.isPhoneNum(user.getTel())) {
+            throw new AddException("添加用户错误：id为空/id已被注册/姓名含空/密码含空/手机号含空/手机号格式不正确");
         }
 
         int result = 0;
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(User user) throws DeleteException {
         if (user == null)
-            throw new DeleteException("删除错误：用户为空");
+            throw new DeleteException("删除用户错误：用户为空");
 
         int result = 0;
         try {
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) throws UpdateException {
         if (user == null)
-            throw new UpdateException("更新错误：用户为空");
+            throw new UpdateException("更新用户错误：用户为空");
 
         int result = 0;
         try {
@@ -81,4 +81,5 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userDao.findAll();
     }
+
 }

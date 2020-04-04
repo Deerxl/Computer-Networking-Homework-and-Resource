@@ -1,7 +1,7 @@
 package com.example.bookshop.controller;
 
 import com.example.bookshop.domain.User;
-import com.example.bookshop.exception.AddUserException;
+import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.UserService;
@@ -23,7 +23,7 @@ public class UserController {
      * @param user 待添加的对象
      */
     @RequestMapping("/add")
-    public void add(User user) throws AddUserException {
+    public void add(User user) throws AddException {
         userService.add(user);
     }
 

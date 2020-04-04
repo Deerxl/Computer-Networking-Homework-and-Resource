@@ -1,20 +1,19 @@
 package com.example.bookshop.service;
 
 import com.example.bookshop.domain.User;
-import com.example.bookshop.exception.AddUserException;
+import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface UserService {
-
+public interface UserService extends BaseService<User> {
     /**
      * 添加用户
      * @param user 待添加的对象
      */
-    void add(User user) throws AddUserException;
+    void add(User user) throws AddException;
 
     /**
      * 删除用户

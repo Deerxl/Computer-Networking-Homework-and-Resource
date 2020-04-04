@@ -6,14 +6,15 @@ import java.util.regex.Pattern;
 
 public class StringFormatUtil {
     /**
-     * 判断给定字符串是否空白串
-     * 空白串是指由空格、制表符、回车符、换行符组成的字符串 若输入字符串为null或空字符串，返回true
+     * 判断给定字符串 去除首尾空格后 是否为空或者包含空格
      */
-    public static boolean isEmpty(String input) {
+    public static boolean hasEmpty(String input) {
         if (input == null || input.length() == 0)
             return true;
-        for (int i = 0; i < input.length(); i++) {
-            char c = input.charAt(i);
+        String temp = input.trim();
+        if (temp.length() == 0) return true;
+        for (int i = 0; i < temp.length(); i++) {
+            char c = temp.charAt(i);
             if (c == ' ' || c == '\t' || c == '\r' || c == '\n') {
                 return true;
             }
@@ -22,13 +23,25 @@ public class StringFormatUtil {
     }
 
     /**
-     * 判断是不是一个合法的手机号码
+     * 判断是不是一个合法的手机号码，含空格则不是
      */
     public static boolean isPhoneNum(String phoneNum) {
         Pattern phone = Pattern
-                .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-        if (isEmpty(phoneNum)) return false;
+                .compile("^[1]([3-9])[0-9]{9}$");
+        if (hasEmpty(phoneNum.trim())) return false;
         return phone.matcher(phoneNum).matches();
+    }
+
+    /**
+     * 判断输入是不是数字
+     */
+    public static boolean isDouble(String input) {
+        try {
+            Double.parseDouble(input.trim());
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -44,7 +57,7 @@ public class StringFormatUtil {
      */
     public static boolean isNumber(String str) {
         try {
-            Integer.parseInt(str.toString());
+            Integer.parseInt(str.trim());
         } catch (Exception e) {
             return false;
         }
