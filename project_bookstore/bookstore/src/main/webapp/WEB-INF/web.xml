@@ -29,6 +29,7 @@
       <param-value>classpath:spring/spring-*.xml</param-value>
     </init-param>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>mvc-dispatcher</servlet-name>
     <!-- 默认匹配所有的请求 -->
@@ -63,6 +64,7 @@
     <servlet-name>DruidStatView</servlet-name>
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>DruidStatView</servlet-name>
     <url-pattern>/druid/*</url-pattern>

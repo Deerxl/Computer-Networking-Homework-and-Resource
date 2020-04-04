@@ -86,16 +86,4 @@ public class User implements Serializable {
                 ", authority=" + authority +
                 '}';
     }
-
-    //public User() {
-    //}
-
-    /*public User(String id, String name, String password, String tel, int authority) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.tel = tel;
-        this.authority = authority;
-    }*/
-
 }

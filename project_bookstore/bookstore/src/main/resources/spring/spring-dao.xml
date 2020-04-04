@@ -47,12 +47,11 @@
                   value="20" />
 
         <!-- 这里配置提交方式，默认就是TRUE，可以不用配置 -->
-
         <property name="defaultAutoCommit" value="true" />
 
         <!-- 验证连接有效与否的SQL，不同的数据配置不同 -->
         <property name="validationQuery" value="select 1 " />
-        <property name="filters" value="stat" />
+        <property name="filters" value="stat,log4j" />
         <property name="proxyFilters">
             <list>
                 <ref bean="logFilter" />
