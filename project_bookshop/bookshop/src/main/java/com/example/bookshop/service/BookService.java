@@ -22,7 +22,7 @@ public interface BookService extends BaseService<Book> {
 
     Book findOneByName(String name);
 
-    List<Book> findPriceRangeIn(float price1, float price2) throws SelectException;
+    List<Book> findPriceRangeIn(double price1, double price2) throws SelectException;
 
     List<Book> findHot();
 }

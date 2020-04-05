@@ -1,5 +1,17 @@
 package com.example.bookshop.util;
 
+import org.springframework.web.context.request.WebRequest;
+
+import javax.activation.MimetypesFileTypeMap;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -62,5 +74,33 @@ public class StringFormatUtil {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 判断给定的路径是否为图片，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif
+     * @param imagePath 图片路径
+     * @return 是否为图片路径
+     */
+    public static boolean isImage(String imagePath) {
+        MimetypesFileTypeMap mtftp = new MimetypesFileTypeMap();
+        mtftp.addMimeTypes("image bmp gif jpeg jpg png raw tif");
+        String mimetype= mtftp.getContentType(imagePath);
+        String type = mimetype.split("/")[0];
+        if(!type.equals("image")) return false;
+
+        try {
+            BufferedImage bufferedImage = ImageIO.read(new File(imagePath));
+            if (bufferedImage != null) return true;
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }
+        try {
+            URL url = new URL(imagePath);
+            HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+            return urlCon.getResponseCode() == HttpURLConnection.HTTP_OK;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

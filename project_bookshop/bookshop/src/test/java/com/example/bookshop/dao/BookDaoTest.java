@@ -58,6 +58,7 @@ public class BookDaoTest {
         book.setIntro("此人很懒，没有简介");
         book.setYear(Year.of(2020));
         book.setNation("中国");
+        book.setState(0);
         int result = bookDao.update(book);
         if (result > 0) System.out.println("更新书籍成功");
     }

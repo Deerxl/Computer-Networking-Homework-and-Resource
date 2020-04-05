@@ -76,4 +76,33 @@ public class StringFormatUtilTest {
         assertFalse(StringFormatUtil.isNumber(str4));
         assertFalse(StringFormatUtil.isNumber(str5));
     }
+
+    @Test
+    public void isImage() {
+        String str1 = "/test1.png";
+        String str2 = "src/test/resources/static/images/book-ordinary-world.jpg";
+        String str3 = "https://pic3.zhimg.com/v2-a9c91cf80a5be2c7a2da172d0fe74e01_1200x500.jpg";
+        String str4 = "https://www.baidu.com";
+        String str5 = "src/test/resources/static/images/book-ordinary-world.bmp";
+        String str6 = "src/test/resources/static/images/book-ordinary-world.jpeg";
+        String str7 = "src/test/resources/static/images/book-ordinary-world.gif";
+        String str8 = "src/test/resources/static/images/book-ordinary-world.png";
+        String str9 = "src/test/resources/static/images/book-ordinary-world.tif";
+        String str10 = "src/test/resources/static/images/book-ordinary-world.raw";
+        String str11 = "";
+        String str12 = "src/test/resources/static/images/testPic.jpg";
+
+        assertFalse(StringFormatUtil.isImage(str1));
+        assertTrue(StringFormatUtil.isImage(str2));
+        assertTrue(StringFormatUtil.isImage(str3));
+        assertFalse(StringFormatUtil.isImage(str4));
+        assertTrue(StringFormatUtil.isImage(str5));
+        assertTrue(StringFormatUtil.isImage(str6));
+        assertTrue(StringFormatUtil.isImage(str7));
+        assertTrue(StringFormatUtil.isImage(str8));
+        assertTrue(StringFormatUtil.isImage(str9));
+        assertTrue(StringFormatUtil.isImage(str10));
+        assertFalse(StringFormatUtil.isImage(str11));
+        assertFalse(StringFormatUtil.isImage(str12));
+    }
 }

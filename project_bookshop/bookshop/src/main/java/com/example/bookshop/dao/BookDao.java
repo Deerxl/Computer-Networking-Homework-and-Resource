@@ -14,13 +14,14 @@ import java.util.List;
 public interface BookDao {
     /**
      * 添加书籍
-     * @param book  待添加的书籍
-     * @return  返回受影响的行数
+     * @param book 待添加的书籍
+     * @return 返回受影响的行数
      */
     @Insert("INSERT INTO book " +
-            "(`id`, `name`, `author`, `image`, `price`, `type`, `score`, `intro`, `nation`, `year`, `hot`) " +
+            "(`id`, `name`, `author`, `image`, `price`, `type`, `score`, `intro`, `nation`, `year`, `hot`, `state`) " +
             "VALUES " +
-            "(#{id}, #{name}, #{author}, #{image}, #{price}, #{type}, #{score}, #{intro}, #{nation}, #{year}, #{hot})")
+            "(#{id}, #{name}, #{author}, #{image}, #{price}, #{type}, " +
+            "#{score}, #{intro}, #{nation}, #{year}, #{hot}, #{state})")
     int add(Book book);
 
     /**
@@ -37,7 +38,8 @@ public interface BookDao {
      * @return 返回受影响的行数
      */
     @Update("UPDATE book SET " +
-            "name = #{name}, author = #{author}, image = #{image}, price = #{price}, type = #{type}, score = #{score}, intro = #{intro}, nation = #{nation}, year = #{year}, hot = #{hot} " +
+            "name = #{name}, author = #{author}, image = #{image}, price = #{price}, type = #{type}, " +
+            "score = #{score}, intro = #{intro}, nation = #{nation}, year = #{year}, hot = #{hot}, state = #{state} " +
             "WHERE id = #{id}")
     int update(Book book);
 
@@ -71,7 +73,7 @@ public interface BookDao {
      * @return 价格在区间[price1, price2]的书籍集合
      */
     @Select("SELECT * FROM book WHERE price >= #{price1} AND price <= #{price2}")
-    List<Book> findPriceRangeIn(float price1, float price2);
+    List<Book> findPriceRangeIn(double price1, double price2);
 
     /**
      * 查找所有的热门书籍

@@ -82,7 +82,7 @@ public class BookController {
      * @return 价格在区间[price1, price2]的书籍集合
      */
     @RequestMapping("/findPriceRangeIn")
-    public List<Book> findPriceRangeIn(float price1, float price2) throws SelectException {
+    public List<Book> findPriceRangeIn(double price1, double price2) throws SelectException {
         return bookService.findPriceRangeIn(price1, price2);
     }
 
