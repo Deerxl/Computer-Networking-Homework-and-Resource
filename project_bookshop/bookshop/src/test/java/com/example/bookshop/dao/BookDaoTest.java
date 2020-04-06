@@ -25,6 +25,7 @@ public class BookDaoTest {
         book.setName("testAddBook");
         book.setAuthor("AddBook");
         book.setPrice(9999.9);
+        book.setType(1);
 
         int result = bookDao.add(book);
         if (result > 0) System.out.println("添加书籍成功");
@@ -38,6 +39,7 @@ public class BookDaoTest {
         book.setName("testDeleteBook");
         book.setAuthor("DeleteBook");
         book.setPrice(9999.9);
+        book.setType(1);
         bookDao.add(book);
 
         int result = bookDao.delete(book);
@@ -52,6 +54,7 @@ public class BookDaoTest {
         book.setName("testDeleteBook");
         book.setAuthor("DeleteBook");
         book.setPrice(9999.9);
+        book.setType(1);
         bookDao.add(book);
 
         book.setHot(1);
@@ -71,6 +74,7 @@ public class BookDaoTest {
         book.setName("testDeleteBook");
         book.setAuthor("DeleteBook");
         book.setPrice(9999.9);
+        book.setType(1);
         bookDao.add(book);
 
         book.setImage("../../../image.jpg");
@@ -91,6 +95,7 @@ public class BookDaoTest {
         book.setName("testfindAll");
         book.setAuthor("findAll");
         book.setPrice(9999.9);
+        book.setType(1);
         bookDao.add(book);
 
         Book book2 = new Book();
@@ -98,6 +103,7 @@ public class BookDaoTest {
         book2.setName("testfindAll2");
         book2.setAuthor("findAll2");
         book2.setPrice(9999.9);
+        book2.setType(1);
         bookDao.add(book2);
 
         System.out.println(bookDao.findAll());
@@ -111,6 +117,7 @@ public class BookDaoTest {
         book.setName("testfindOneByName");
         book.setAuthor("findOneByName");
         book.setPrice(9999.9);
+        book.setType(1);
         bookDao.add(book);
 
         Book book2 = new Book();
@@ -118,6 +125,7 @@ public class BookDaoTest {
         book2.setName("findOneByName2");
         book2.setAuthor("findOneByName2");
         book2.setPrice(9999.9);
+        book2.setType(1);
         bookDao.add(book2);
 
         System.out.println(bookDao.findOneByName("testfindAll"));
@@ -131,6 +139,7 @@ public class BookDaoTest {
         book.setName("testfindPriceGreaterThan");
         book.setAuthor("findPriceGreaterThan");
         book.setPrice(999.9);
+        book.setType(1);
         bookDao.add(book);
 
         Book book2 = new Book();
@@ -138,6 +147,7 @@ public class BookDaoTest {
         book2.setName("testfindPriceGreaterThan2");
         book2.setAuthor("findPriceGreaterThan2");
         book2.setPrice(9999.9);
+        book2.setType(1);
         bookDao.add(book2);
 
         System.out.println(bookDao.findPriceRangeIn(999,9999));
@@ -152,6 +162,7 @@ public class BookDaoTest {
         book.setAuthor("findHot");
         book.setPrice(999.9);
         book.setHot(1);
+        book.setType(1);
         bookDao.add(book);
 
         Book book2 = new Book();
@@ -160,6 +171,7 @@ public class BookDaoTest {
         book2.setAuthor("findHot");
         book2.setPrice(9999.9);
         book2.setHot(2);
+        book2.setType(1);
         bookDao.add(book2);
 
         System.out.println(bookDao.findHot());

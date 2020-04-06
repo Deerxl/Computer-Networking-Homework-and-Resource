@@ -1,16 +1,11 @@
 package com.example.bookshop.util;
 
-import org.springframework.web.context.request.WebRequest;
-
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,15 +13,15 @@ import java.util.regex.Pattern;
 
 public class StringFormatUtil {
     /**
-     * 判断给定字符串 去除首尾空格后 是否为空或者包含空格
+     * 判断给定字符串 是否为空或者包含空格
+     * @param input 需要检测的字符串
+     * @return 是否含任何形式的空格
      */
     public static boolean hasEmpty(String input) {
         if (input == null || input.length() == 0)
             return true;
-        String temp = input.trim();
-        if (temp.length() == 0) return true;
-        for (int i = 0; i < temp.length(); i++) {
-            char c = temp.charAt(i);
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
             if (c == ' ' || c == '\t' || c == '\r' || c == '\n') {
                 return true;
             }
@@ -35,17 +30,21 @@ public class StringFormatUtil {
     }
 
     /**
-     * 判断是不是一个合法的手机号码，含空格则不是
+     * 判断给定的字符串是否是一个合法的11位手机号码
+     * @param phoneNum 需要检测的手机号码
+     * @return 是否是一个合法的11位手机号码
      */
     public static boolean isPhoneNum(String phoneNum) {
         Pattern phone = Pattern
                 .compile("^[1]([3-9])[0-9]{9}$");
-        if (hasEmpty(phoneNum.trim())) return false;
+        if (hasEmpty(phoneNum)) return false;
         return phone.matcher(phoneNum).matches();
     }
 
     /**
-     * 判断输入是不是数字
+     * 判断输入是否为double类型的数字
+     * @param input 需要检测的字符串
+     * @return 是否为double类型的数字
      */
     public static boolean isDouble(String input) {
         try {
@@ -57,7 +56,8 @@ public class StringFormatUtil {
     }
 
     /**
-     * 返回当前系统时间 yyyy-MM-dd
+     * 获取当前系统时间 yyyy-MM-dd
+     * @return 当前系统时间 yyyy-MM-dd
      */
     public static String getDataTime() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -65,7 +65,9 @@ public class StringFormatUtil {
     }
 
     /**
-     * 判断一个字符串是不是数字
+     * 判断一个字符串是否全是数字组成
+     * @param str 待检测的字符串
+     * @return 此字符串是否全是数字
      */
     public static boolean isNumber(String str) {
         try {

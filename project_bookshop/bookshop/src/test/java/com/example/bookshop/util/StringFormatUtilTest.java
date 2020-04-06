@@ -21,7 +21,7 @@ public class StringFormatUtilTest {
 
         assertTrue(StringFormatUtil.hasEmpty(str1));
         assertTrue(StringFormatUtil.hasEmpty(str2));
-        assertFalse(StringFormatUtil.hasEmpty(str3));
+        assertTrue(StringFormatUtil.hasEmpty(str3));
         assertTrue(StringFormatUtil.hasEmpty(str4));
         assertFalse(StringFormatUtil.hasEmpty(str5));
     }

@@ -1,0 +1,9 @@
+com.example
+com.example.bookshop.config
+com.example.bookshop.controller
+com.example.bookshop.dao
+com.example.bookshop.domain
+com.example.bookshop.exception
+com.example.bookshop.service
+com.example.bookshop.service.Impl
+com.example.bookshop.util

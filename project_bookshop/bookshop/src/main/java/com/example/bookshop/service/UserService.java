@@ -12,18 +12,21 @@ public interface UserService extends BaseService<User> {
     /**
      * 添加用户
      * @param user 待添加的对象
+     * @throws AddException 各类添加异常
      */
     void add(User user) throws AddException;
 
     /**
      * 删除用户
-     * @param user 待删除对象
+     * @param id 待删除对象的id
+     * @throws DeleteException id不存在导致的删除异常或其他异常
      */
-    void delete(User user) throws DeleteException;
+    void delete(Serializable id) throws DeleteException;
 
     /**
      * 更新用户
      * @param user 待更新对象
+     * @throws UpdateException 各类更新异常
      */
     void update(User user) throws UpdateException;
 

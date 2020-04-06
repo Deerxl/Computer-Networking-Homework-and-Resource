@@ -5,8 +5,11 @@ import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.UserService;
+import com.example.bookshop.util.ReturnMsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
@@ -14,48 +17,75 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements BaseController<User> {
     @Autowired
     UserService userService;
 
     /**
      * 增加用户 URL: /user/add
      * @param user 待添加的对象
+     * @return 返回ReturnMsgUtil对象，(state, message)
      */
-    @RequestMapping("/add")
-    public void add(User user) throws AddException {
-        userService.add(user);
+    @Override
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ReturnMsgUtil add(User user) {
+        try {
+            userService.add(user);
+            return new ReturnMsgUtil(successCode, "success");
+        } catch (AddException e) {
+            return new ReturnMsgUtil(failCode, e.getMessage());
+        }
     }
 
     /**
      * 删除用户 URL: /user/delete
-     * @param user 待删除的对象
+     * @param id 待删除的对象的id
+     * @return 返回ReturnMsgUtil对象，(state, message)
      */
-    @RequestMapping("/delete")
-    public void delete(User user) throws DeleteException {
-        userService.delete(user);
+    @Override
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public ReturnMsgUtil delete(@RequestParam(value = "id") Serializable id) {
+        try {
+            userService.delete(id);
+            return new ReturnMsgUtil(successCode, "success");
+        } catch (DeleteException e) {
+            return new ReturnMsgUtil(failCode, e.getMessage());
+        }
     }
 
     /**
      * 更新用户 URL: /user/update
      * @param user 待更新的对象
+     * @return 返回ReturnMsgUtil对象，(state, message)
      */
-    @RequestMapping("/update")
-    public void update(User user) throws UpdateException {
-        userService.update(user);
+    @Override
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ReturnMsgUtil update(User user) {
+        try {
+            userService.update(user);
+            return new ReturnMsgUtil(successCode, "success");
+        } catch (UpdateException e) {
+            return new ReturnMsgUtil(failCode, e.getMessage());
+        }
     }
 
     /**
-     * 通过ID查找用户 URL: /user/findUserById
+     * 通过ID查找用户 URL: /user/findOneById
      * @param id 待查找的用户ID
      * @return 待查找的用户
      */
-    @RequestMapping("/findUserById")
-    public User findUserById(Serializable id) {
+    @Override
+    @RequestMapping(value = "/findOneById", method = RequestMethod.GET)
+    public User findOneById(Serializable id) {
         return userService.findOneById(id);
     }
 
-    @RequestMapping("/findAll")
+    /**
+     * 查找所有的用户
+     * @return 用户集合
+     */
+    @Override
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public List<User> findAll() {
         return userService.findAll();
     }

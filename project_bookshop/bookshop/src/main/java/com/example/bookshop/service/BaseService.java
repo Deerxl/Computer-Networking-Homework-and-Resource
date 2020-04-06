@@ -11,21 +11,21 @@ public interface BaseService<T> {
     /**
      * 添加对象
      * @param t 待添加的对象
-     * @throws AddException 添加异常
+     * @throws AddException 各类添加异常
      */
     void add(T t) throws AddException;
 
     /**
      * 删除对象
-     * @param t 待删除的对象
-     * @throws DeleteException 删除异常
+     * @param id 待删除的对象的id
+     * @throws DeleteException 各类删除异常
      */
-    void delete(T t) throws DeleteException;
+    void delete(Serializable id) throws DeleteException;
 
     /**
      * 更新对象
      * @param t 待更新的对象
-     * @throws UpdateException 更新异常
+     * @throws UpdateException 各类更新异常
      */
     void update(T t) throws UpdateException;
 

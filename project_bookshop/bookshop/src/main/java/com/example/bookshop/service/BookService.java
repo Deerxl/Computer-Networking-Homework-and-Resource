@@ -12,7 +12,7 @@ import java.util.List;
 public interface BookService extends BaseService<Book> {
     void add(Book book) throws AddException;
 
-    void delete(Book book) throws DeleteException;
+    void delete(Serializable id) throws DeleteException;
 
     void update(Book book) throws UpdateException;
 
@@ -22,7 +22,9 @@ public interface BookService extends BaseService<Book> {
 
     Book findOneByName(String name);
 
-    List<Book> findPriceRangeIn(double price1, double price2) throws SelectException;
+    List<Book> findPriceRangeIn(double price1, double price2);
 
     List<Book> findHot();
+
+    List<Book> findBooksByType(int type);
 }

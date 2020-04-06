@@ -4,7 +4,6 @@ import com.example.bookshop.dao.BookDao;
 import com.example.bookshop.domain.Book;
 import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
-import com.example.bookshop.exception.SelectException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.util.StringFormatUtil;
@@ -26,7 +25,6 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public void add(Book book) throws AddException {
-        // TODO: 2020/4/5  检查图片路径、价格是否符合范围等条件
         if (book == null) {
             throw new AddException("添加书籍错误：书籍为空");
         } else if (StringFormatUtil.hasEmpty(book.getId())
@@ -38,7 +36,7 @@ public class BookServiceImpl implements BookService {
         } else if (StringFormatUtil.isDouble(String.valueOf(book.getPrice())) || book.getPrice() < 0) {
             throw new AddException("添加书籍错误：价格格式/范围不正确");
         } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage())) {
-            throw new AddException("添加书籍错误：书籍地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
+            throw new AddException("添加书籍错误：图片地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
         } else if (book.getHot() > 2 || book.getHot() < 0) {
             throw new AddException("添加书籍错误：热门范围不正确，应为0-2，0：未知 1：不热门 2：热门");
         } else if (book.getState() > 2 || book.getState() < 0) {
@@ -53,23 +51,24 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             System.out.println("添加书籍失败");
             e.printStackTrace();
+            throw new AddException("添加书籍失败：" + e.getMessage());
         }
         if (result > 0) System.out.println("添加书籍成功");
     }
 
     @Override
-    public void delete(Book book) throws DeleteException {
-        if (book == null){
+    public void delete(Serializable id) throws DeleteException {
+        if (id == null){
             throw new DeleteException("删除书籍错误：书籍为空");
         }
 
-
         int result = 0;
         try {
-            result = bookDao.delete(book);
+            result = bookDao.delete(id);
         } catch (Exception e) {
             System.out.println("删除书籍失败");
             e.printStackTrace();
+            throw new DeleteException("删除书籍失败：" + e.getMessage());
         }
         if (result > 0) System.out.println("删除书籍成功");
     }
@@ -88,7 +87,7 @@ public class BookServiceImpl implements BookService {
         } else if (StringFormatUtil.isDouble(String.valueOf(book.getPrice())) || book.getPrice() < 0) {
             throw new UpdateException("更新书籍错误：价格格式/范围不正确");
         } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage())) {
-            throw new UpdateException("更新书籍错误：书籍地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
+            throw new UpdateException("更新书籍错误：图片地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
         } else if (book.getHot() > 2 || book.getHot() < 0) {
             throw new UpdateException("更新书籍错误：热门范围不正确，应为0-2，0：未知 1：不热门 2：热门");
         } else if (book.getState() > 2 || book.getState() < 0) {
@@ -103,6 +102,7 @@ public class BookServiceImpl implements BookService {
         } catch (Exception e) {
             System.out.println("更新书籍失败");
             e.printStackTrace();
+            throw new UpdateException("更新书籍失败：" + e.getMessage());
         }
         if (result > 0) System.out.println("更新书籍成功");
     }
@@ -126,16 +126,15 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
-     * 查找价格在[price1, price2]之间的书籍，需使price1<price2且price1>0
+     * 查找价格在[price1, price2]之间的书籍，需使price1小于price2且price1不小于0
      * @param price1 价格下限
      * @param price2 价格上限
      * @return 书籍集合
-     * @throws SelectException 价位范围不正确
      */
     @Override
-    public List<Book> findPriceRangeIn(double price1, double price2) throws SelectException {
-        if (price1 > price2 || price1 < 0)
-            throw new SelectException("查找出错：请检查价格范围");
+    public List<Book> findPriceRangeIn(double price1, double price2) {
+        //if (price1 > price2 || price1 < 0)
+        //    throw new SelectException("查找出错：请检查价格范围");
 
         return bookDao.findPriceRangeIn(price1, price2);
     }
@@ -143,5 +142,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findHot() {
         return bookDao.findHot();
+    }
+
+    @Override
+    public List<Book> findBooksByType(int type) {
+        return bookDao.findBooksByType(type);
     }
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public interface BookDao {
+public interface BookDao extends BaseDao<Book> {
     /**
      * 添加书籍
      * @param book 待添加的书籍
@@ -26,11 +26,11 @@ public interface BookDao {
 
     /**
      * 删除书籍
-     * @param book 待删除的书籍
+     * @param id 待删除的书籍的id
      * @return 返回受影响的行数
      */
     @Delete("DELETE FROM book WHERE id = #{id}")
-    int delete(Book book);
+    int delete(Serializable id);
 
     /**
      * 更新书籍
@@ -81,4 +81,12 @@ public interface BookDao {
      */
     @Select("SELECT * FROM book WHERE hot = 2")
     List<Book> findHot();
+
+    /**
+     * 通过书籍类型查找书籍
+     * @param type 书籍类型
+     * @return 书籍集合
+     */
+    @Select("SELECT * FROM book WHERE type = #{type}")
+    List<Book> findBooksByType(int type);
 }

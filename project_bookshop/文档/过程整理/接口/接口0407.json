@@ -1,0 +1,1737 @@
+{
+  "info": {
+    "name": "RAP2 Pack test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "用户",
+      "item": [
+        {
+          "name": "更新用户",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/user/add",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/user/add" ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "",
+                  "description": "用户对象"
+                },
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "id不可更改"
+                },
+                {
+                  "key": "name",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "tel",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "authority",
+                  "value": "",
+                  "description": "权限，0：管理员，1：顾客，默认1"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "state",
+              "value": ""
+            },
+            {
+              "key": "message",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "增加用户",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/user/add",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/user/add" ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "name",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "tel",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "authority",
+                  "value": "",
+                  "description": "权限：0：管理员，1：顾客"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "message",
+              "value": ""
+            },
+            {
+              "key": "state",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "删除用户",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/user/delete",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/user/delete" ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "待删除用户的id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "state",
+              "value": ""
+            },
+            {
+              "key": "message",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "通过id查找用户",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/user/findonebyid",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/user/findOneById" ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "用户id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "User",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "password",
+              "value": ""
+            },
+            {
+              "key": "tel",
+              "value": ""
+            },
+            {
+              "key": "authority",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "查找所有用户",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/user/findall",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/user/findAll" ],
+              "query": []
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "List<User>",
+              "value": ""
+            },
+            {
+              "key": "user",
+              "value": ""
+            },
+            {
+              "key": "user",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "书籍",
+      "item": [
+        {
+          "name": "根据id查找书籍",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/findonebyid",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/findOneById" ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "书籍的id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "book",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "author",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "price",
+              "value": ""
+            },
+            {
+              "key": "type",
+              "value": ""
+            },
+            {
+              "key": "score",
+              "value": ""
+            },
+            {
+              "key": "intro",
+              "value": ""
+            },
+            {
+              "key": "nation",
+              "value": ""
+            },
+            {
+              "key": "year",
+              "value": ""
+            },
+            {
+              "key": "hot",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "添加书籍",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/add",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/add" ],
+              "query": [
+                {
+                  "key": "book",
+                  "value": "",
+                  "description": "书籍对象。具体属性信息可从”更新书籍“里查看。"
+                },
+                {
+                  "key": "name",
+                  "value": "",
+                  "description": "名称"
+                },
+                {
+                  "key": "author",
+                  "value": "",
+                  "description": "作者"
+                },
+                {
+                  "key": "image",
+                  "value": "",
+                  "description": "图片地址"
+                },
+                {
+                  "key": "price",
+                  "value": "",
+                  "description": "价格"
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "种类"
+                },
+                {
+                  "key": "score",
+                  "value": "",
+                  "description": "评分"
+                },
+                {
+                  "key": "intro",
+                  "value": "",
+                  "description": "简介"
+                },
+                {
+                  "key": "nation",
+                  "value": "",
+                  "description": "国家"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "年份"
+                },
+                {
+                  "key": "hot",
+                  "value": "",
+                  "description": "是否热门"
+                },
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "id需要补充，因为返回后端的是book对象。缺少主键（非空）无法添加。"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "state",
+              "value": ""
+            },
+            {
+              "key": "message",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "删除书籍",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/delete",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/delete" ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "书籍id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "state",
+              "value": ""
+            },
+            {
+              "key": "message",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "更新书籍",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/update",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/update" ],
+              "query": [
+                {
+                  "key": "book",
+                  "value": "",
+                  "description": "一个对象，含有Book类的所有字段"
+                },
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "id不可更改"
+                },
+                {
+                  "key": "name",
+                  "value": "",
+                  "description": "书名"
+                },
+                {
+                  "key": "author",
+                  "value": "",
+                  "description": "作者"
+                },
+                {
+                  "key": "image",
+                  "value": "",
+                  "description": "图片地址，支持相对/绝对路径，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif'"
+                },
+                {
+                  "key": "price",
+                  "value": "",
+                  "description": "大于0"
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "1\t未分类\tnone\n2\t文学\tliterature\n3\t哲学\tphilosophy\n4\t政治\tpolitics\n5\t军事\tmilitary\n6\t艺术\tart\n7\t地理\tgeography\n8\t科幻\tfiction\n9\t悬疑\tsuspense\n10\t科学\tscience\n11\t其他\tothers"
+                },
+                {
+                  "key": "score",
+                  "value": "",
+                  "description": "分数，0-10"
+                },
+                {
+                  "key": "intro",
+                  "value": "",
+                  "description": ""
+                },
+                {
+                  "key": "nation",
+                  "value": "",
+                  "description": "默认\\\"未知\\\""
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "年份，如2020"
+                },
+                {
+                  "key": "hot",
+                  "value": "",
+                  "description": "热门：0：未知 1：不热门 2：热门，默认0"
+                },
+                {
+                  "key": "state",
+                  "value": "",
+                  "description": "状态：0：在售 1：下架；2：预售"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "state",
+              "value": ""
+            },
+            {
+              "key": "message",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "查找所有书籍",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/findall",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/findAll" ],
+              "query": []
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "List<Book>",
+              "value": ""
+            },
+            {
+              "key": "book1",
+              "value": ""
+            },
+            {
+              "key": "book2",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "根据书名查找书籍",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/findonebyname",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/findOneByName" ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "",
+                  "description": "书名"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "book",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "查找价格在某范围间的书籍",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/findpricerangein",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/findPriceRangeIn" ],
+              "query": [
+                {
+                  "key": "price1",
+                  "value": "",
+                  "description": "价格下限"
+                },
+                {
+                  "key": "price2",
+                  "value": "",
+                  "description": "价格上限"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "List<Book>",
+              "value": ""
+            },
+            {
+              "key": "book1",
+              "value": ""
+            },
+            {
+              "key": "book2",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "查找所有的热门书籍",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/findhot",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/findHot" ],
+              "query": []
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "List<Book>",
+              "value": ""
+            },
+            {
+              "key": "book1",
+              "value": ""
+            },
+            {
+              "key": "book2",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "查找某一类型的书籍",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/book/findbytype",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/book/findByType" ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "1\t未分类\tnone\n2\t文学\tliterature\n3\t哲学\tphilosophy\n4\t政治\tpolitics\n5\t军事\tmilitary\n6\t艺术\tart\n7\t地理\tgeography\n8\t科幻\tfiction\n9\t悬疑\tsuspense\n10\t科学\tscience\n11\t其他\tothers"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "List<Book>",
+              "value": ""
+            },
+            {
+              "key": "book1",
+              "value": ""
+            },
+            {
+              "key": "book2",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "订单",
+      "item": [
+        {
+          "name": "示例接口",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/example/1586189574353",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/example/1586189574353" ],
+              "query": [
+                {
+                  "key": "foo",
+                  "value": "@ctitle",
+                  "description": "请求属性示例"
+                }
+              ]
+            },
+            "description": "示例接口描述"
+          },
+          "response": [
+            {
+              "key": "string",
+              "value": "★"
+            },
+            {
+              "key": "number",
+              "value": "1"
+            },
+            {
+              "key": "boolean",
+              "value": "true"
+            },
+            {
+              "key": "regexp",
+              "value": "/[a-z][A-Z][0-9]/"
+            },
+            {
+              "key": "function",
+              "value": "() => Math.random()"
+            },
+            {
+              "key": "array",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "items",
+              "value": "[1, true, 'hello', /\\w{10}/]"
+            },
+            {
+              "key": "object",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "placeholder",
+              "value": "@title"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "首页",
+      "item": [
+        {
+          "name": "首页书籍清单",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/general/books",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "general/books" ],
+              "query": []
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "carousal",
+              "value": ""
+            },
+            {
+              "key": "rank",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "hot",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "bookkinds",
+              "value": ""
+            },
+            {
+              "key": "literature",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "suspense",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "sci-fi",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "intro",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "首页换一批",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/general/another",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "general/another" ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "0：热门  1：文学  2：科幻 3：悬疑"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "books",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "示例接口",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/example/1586189688745",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/example/1586189688745" ],
+              "query": [
+                {
+                  "key": "foo",
+                  "value": "@ctitle",
+                  "description": "请求属性示例"
+                }
+              ]
+            },
+            "description": "示例接口描述"
+          },
+          "response": [
+            {
+              "key": "string",
+              "value": "★"
+            },
+            {
+              "key": "number",
+              "value": "1"
+            },
+            {
+              "key": "boolean",
+              "value": "true"
+            },
+            {
+              "key": "regexp",
+              "value": "/[a-z][A-Z][0-9]/"
+            },
+            {
+              "key": "function",
+              "value": "() => Math.random()"
+            },
+            {
+              "key": "array",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "items",
+              "value": "[1, true, 'hello', /\\w{10}/]"
+            },
+            {
+              "key": "object",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "placeholder",
+              "value": "@title"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "待定",
+      "item": [
+        {
+          "name": "商城/书籍管理界面多维搜索",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/待定",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "待定" ],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "查询结果包含的种类的序号构成的列表，元素为int类型的序号。"
+                },
+                {
+                  "key": "year",
+                  "value": "",
+                  "description": "查询结果包含的年份构成的列表，元素为字符串。"
+                },
+                {
+                  "key": "nation",
+                  "value": "",
+                  "description": "查询结果要包含的国家构成的列表，元素为字符串。"
+                },
+                {
+                  "key": "priceRange",
+                  "value": "",
+                  "description": "两个Number类型的元素，分别为最低价格和最高价格，闭区间。"
+                },
+                {
+                  "key": "hot",
+                  "value": "",
+                  "description": "true代表只返回热门数据，false代表不是"
+                },
+                {
+                  "key": "Name",
+                  "value": "",
+                  "description": "只返回书籍名称中包含该字符串的书籍"
+                }
+              ]
+            },
+            "description": "请求参数可能只包含列出的一部分。如果一个字段没有被包含在请求参数中，则意味着此次搜索对该字段无要求"
+          },
+          "response": [
+            {
+              "key": "books",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "下订单",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/待定",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "待定" ],
+              "query": [
+                {
+                  "key": "order",
+                  "value": "",
+                  "description": "订单"
+                },
+                {
+                  "key": "time",
+                  "value": "",
+                  "description": "订单时间"
+                },
+                {
+                  "key": "buyer",
+                  "value": "",
+                  "description": "下单者，user账号"
+                },
+                {
+                  "key": "address",
+                  "value": "",
+                  "description": "地址"
+                },
+                {
+                  "key": "receiver",
+                  "value": "",
+                  "description": "收件人"
+                },
+                {
+                  "key": "orderitems",
+                  "value": "",
+                  "description": "订单项组成的列表，长度不定"
+                },
+                {
+                  "key": "book",
+                  "value": "",
+                  "description": "Book的id"
+                },
+                {
+                  "key": "count",
+                  "value": "",
+                  "description": "数量"
+                },
+                {
+                  "key": "nation",
+                  "value": "",
+                  "description": "国家"
+                },
+                {
+                  "key": "province",
+                  "value": "",
+                  "description": "省份"
+                },
+                {
+                  "key": "city",
+                  "value": "",
+                  "description": "县市"
+                },
+                {
+                  "key": "details",
+                  "value": "",
+                  "description": "详细地址"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "state",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "获取某一本书的存储量",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/待定",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "待定" ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "",
+                  "description": "书籍id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "count",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "统计界面获取统计信息",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/待定",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "待定" ],
+              "query": [
+                {
+                  "key": "dataType",
+                  "value": "",
+                  "description": "0：销售量  1：销售金额"
+                },
+                {
+                  "key": "peroidType",
+                  "value": "",
+                  "description": "0：按年提供数据  1：按月提供数据  2：按日提供数据"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "data",
+              "value": ""
+            },
+            {
+              "key": "time",
+              "value": ""
+            },
+            {
+              "key": "value",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "添加收获地址",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/待定",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "待定" ],
+              "query": []
+            },
+            "description": ""
+          },
+          "response": []
+        },
+        {
+          "name": "购买历史界面查询购买历史",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/待定",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "待定" ],
+              "query": [
+                {
+                  "key": "user",
+                  "value": "id",
+                  "description": "用户id"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "data",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "time",
+              "value": ""
+            },
+            {
+              "key": "count",
+              "value": ""
+            },
+            {
+              "key": "price",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "示例接口",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/example/1586189718753",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/example/1586189718753" ],
+              "query": [
+                {
+                  "key": "foo",
+                  "value": "@ctitle",
+                  "description": "请求属性示例"
+                }
+              ]
+            },
+            "description": "示例接口描述"
+          },
+          "response": [
+            {
+              "key": "string",
+              "value": "★"
+            },
+            {
+              "key": "number",
+              "value": "1"
+            },
+            {
+              "key": "boolean",
+              "value": "true"
+            },
+            {
+              "key": "regexp",
+              "value": "/[a-z][A-Z][0-9]/"
+            },
+            {
+              "key": "function",
+              "value": "() => Math.random()"
+            },
+            {
+              "key": "array",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "items",
+              "value": "[1, true, 'hello', /\\w{10}/]"
+            },
+            {
+              "key": "object",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "placeholder",
+              "value": "@title"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "商城",
+      "item": [
+        {
+          "name": "商城界面获取推荐书籍的信息",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/mall/recommend",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "mall/recommend" ],
+              "query": []
+            },
+            "description": "返回商城界面的5本推荐书籍"
+          },
+          "response": [
+            {
+              "key": "books",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "示例接口",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/example/1586189732192",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/example/1586189732192" ],
+              "query": [
+                {
+                  "key": "foo",
+                  "value": "@ctitle",
+                  "description": "请求属性示例"
+                }
+              ]
+            },
+            "description": "示例接口描述"
+          },
+          "response": [
+            {
+              "key": "string",
+              "value": "★"
+            },
+            {
+              "key": "number",
+              "value": "1"
+            },
+            {
+              "key": "boolean",
+              "value": "true"
+            },
+            {
+              "key": "regexp",
+              "value": "/[a-z][A-Z][0-9]/"
+            },
+            {
+              "key": "function",
+              "value": "() => Math.random()"
+            },
+            {
+              "key": "array",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "items",
+              "value": "[1, true, 'hello', /\\w{10}/]"
+            },
+            {
+              "key": "object",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "placeholder",
+              "value": "@title"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "购物车",
+      "item": [
+        {
+          "name": "购物车界面获取书籍信息",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/cart/books",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "cart/books" ],
+              "query": [
+                {
+                  "key": "books",
+                  "value": "",
+                  "description": "书籍id的数组"
+                }
+              ]
+            },
+            "description": ""
+          },
+          "response": [
+            {
+              "key": "books",
+              "value": ""
+            },
+            {
+              "key": "id",
+              "value": ""
+            },
+            {
+              "key": "name",
+              "value": ""
+            },
+            {
+              "key": "image",
+              "value": ""
+            },
+            {
+              "key": "price",
+              "value": ""
+            },
+            {
+              "key": "stock-count",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "示例接口",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{url}}/example/1586189744458",
+              "host": "{{url}}",
+              "port": "",
+              "hash": null,
+              "path": [ "/example/1586189744458" ],
+              "query": [
+                {
+                  "key": "foo",
+                  "value": "@ctitle",
+                  "description": "请求属性示例"
+                }
+              ]
+            },
+            "description": "示例接口描述"
+          },
+          "response": [
+            {
+              "key": "string",
+              "value": "★"
+            },
+            {
+              "key": "number",
+              "value": "1"
+            },
+            {
+              "key": "boolean",
+              "value": "true"
+            },
+            {
+              "key": "regexp",
+              "value": "/[a-z][A-Z][0-9]/"
+            },
+            {
+              "key": "function",
+              "value": "() => Math.random()"
+            },
+            {
+              "key": "array",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "items",
+              "value": "[1, true, 'hello', /\\w{10}/]"
+            },
+            {
+              "key": "object",
+              "value": ""
+            },
+            {
+              "key": "foo",
+              "value": "1"
+            },
+            {
+              "key": "bar",
+              "value": "★"
+            },
+            {
+              "key": "placeholder",
+              "value": "@title"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

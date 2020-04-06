@@ -9,7 +9,7 @@ import java.util.List;
 
 //@Mapper
 @Repository
-public interface UserDao {
+public interface UserDao extends BaseDao<User> {
     /**
      * 添加用户
      * @param user 待添加的对象
@@ -21,16 +21,16 @@ public interface UserDao {
 
     /**
      * 删除用户
-     * @param user 待删除对象
-     * @return 返回受影响的条数
+     * @param id 待删除对象的id
+     * @return 返回受影响的行数
      */
     @Delete("DELETE FROM user WHERE id = #{id}")
-    int delete(User user);
+    int delete(Serializable id);
 
     /**
      * 更新用户
      * @param user 待更新对象
-     * @return 返回受影响的条数
+     * @return 返回受影响的行数
      */
     @Update("UPDATE user SET " +
             "name = #{name}, password = #{password}, tel = #{tel}, authority = #{authority} " +
