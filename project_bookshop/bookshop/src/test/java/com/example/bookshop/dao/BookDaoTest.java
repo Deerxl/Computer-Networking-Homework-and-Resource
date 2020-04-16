@@ -1,6 +1,5 @@
 package com.example.bookshop.dao;
 
-
 import com.example.bookshop.domain.Book;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,13 +20,16 @@ public class BookDaoTest {
     @Transactional
     public void add() {
         Book book = new Book();
-        book.setId("0405testAddBook");
+        //book.setId(bookDao.findMaxId() + 1);
         book.setName("testAddBook");
         book.setAuthor("AddBook");
         book.setPrice(9999.9);
         book.setType(1);
 
         int result = bookDao.add(book);
+        System.out.println(book.getId());
+        System.out.println(book);
+        System.out.println(bookDao.findMaxId());
         if (result > 0) System.out.println("添加书籍成功");
     }
 
@@ -35,14 +37,14 @@ public class BookDaoTest {
     @Transactional
     public void delete() {
         Book book = new Book();
-        book.setId("0405testDeleteBook");
+        //book.setId(3);
         book.setName("testDeleteBook");
         book.setAuthor("DeleteBook");
         book.setPrice(9999.9);
         book.setType(1);
         bookDao.add(book);
 
-        int result = bookDao.delete(book);
+        int result = bookDao.delete(book.getId());
         if (result > 0) System.out.println("删除书籍成功");
     }
 
@@ -50,18 +52,16 @@ public class BookDaoTest {
     @Transactional
     public void update() {
         Book book = new Book();
-        book.setId("0405testDeleteBook");
-        book.setName("testDeleteBook");
-        book.setAuthor("DeleteBook");
+        //book.setId(4);
+        book.setName("testUpdateBook");
+        book.setAuthor("UpdateBook");
         book.setPrice(9999.9);
         book.setType(1);
         bookDao.add(book);
 
-        book.setHot(1);
         book.setIntro("此人很懒，没有简介");
         book.setYear(Year.of(2020));
         book.setNation("中国");
-        book.setState(0);
         int result = bookDao.update(book);
         if (result > 0) System.out.println("更新书籍成功");
     }
@@ -70,28 +70,21 @@ public class BookDaoTest {
     @Transactional
     public void findOneById() {
         Book book = new Book();
-        book.setId("0405testDeleteBook");
-        book.setName("testDeleteBook");
-        book.setAuthor("DeleteBook");
+        //book.setId(5);
+        book.setName("testfindOneById");
+        book.setAuthor("findOneById");
         book.setPrice(9999.9);
         book.setType(1);
         bookDao.add(book);
 
-        book.setImage("../../../image.jpg");
-        book.setNation("中国");
-        book.setScore(5);
-        book.setType(1);
-        book.setHot(1);
-        book.setIntro("this one is lazy, and left nothing");
-        int result = bookDao.update(book);
-        if (result > 0) System.out.println("更新书籍成功");
+        System.out.println(bookDao.findOneById(null));
     }
 
     @Test
     @Transactional
     public void findAll() {
         Book book = new Book();
-        book.setId("0405testfindAll");
+        book.setId(6);
         book.setName("testfindAll");
         book.setAuthor("findAll");
         book.setPrice(9999.9);
@@ -99,7 +92,7 @@ public class BookDaoTest {
         bookDao.add(book);
 
         Book book2 = new Book();
-        book2.setId("0405testfindAll2");
+        book2.setId(7);
         book2.setName("testfindAll2");
         book2.setAuthor("findAll2");
         book2.setPrice(9999.9);
@@ -113,7 +106,7 @@ public class BookDaoTest {
     @Transactional
     public void findOneByName() {
         Book book = new Book();
-        book.setId("0405testfindOneByName");
+        //book.setId(8);
         book.setName("testfindOneByName");
         book.setAuthor("findOneByName");
         book.setPrice(9999.9);
@@ -121,7 +114,7 @@ public class BookDaoTest {
         bookDao.add(book);
 
         Book book2 = new Book();
-        book2.setId("0405findOneByName2");
+        //book2.setId(9);
         book2.setName("findOneByName2");
         book2.setAuthor("findOneByName2");
         book2.setPrice(9999.9);
@@ -135,17 +128,17 @@ public class BookDaoTest {
     @Transactional
     public void findPriceRangeIn() {
         Book book = new Book();
-        book.setId("0405findPriceGreaterThan");
-        book.setName("testfindPriceGreaterThan");
-        book.setAuthor("findPriceGreaterThan");
+        //book.setId(10);
+        book.setName("testfindPriceRangeIn");
+        book.setAuthor("findPriceRangeIn");
         book.setPrice(999.9);
         book.setType(1);
         bookDao.add(book);
 
         Book book2 = new Book();
-        book2.setId("0405findPriceGreaterThan2");
-        book2.setName("testfindPriceGreaterThan2");
-        book2.setAuthor("findPriceGreaterThan2");
+        //book2.setId(11);
+        book2.setName("testfindPriceRangeIn2");
+        book2.setAuthor("findPriceRangeIn2");
         book2.setPrice(9999.9);
         book2.setType(1);
         bookDao.add(book2);
@@ -155,25 +148,17 @@ public class BookDaoTest {
 
     @Test
     @Transactional
-    public void findHot() {
-        Book book = new Book();
-        book.setId("0405findHot");
-        book.setName("testfindHot");
-        book.setAuthor("findHot");
-        book.setPrice(999.9);
-        book.setHot(1);
-        book.setType(1);
-        bookDao.add(book);
+    public void findMaxId() {
+        System.out.println(bookDao.findMaxId());
+    }
 
-        Book book2 = new Book();
-        book2.setId("0405findHot2");
-        book2.setName("testfindHot");
-        book2.setAuthor("findHot");
-        book2.setPrice(9999.9);
-        book2.setHot(2);
-        book2.setType(1);
-        bookDao.add(book2);
+    @Test
+    public void getCarouselBooks() {
+        System.out.println(bookDao.getCarouselBooks());
+    }
 
-        System.out.println(bookDao.findHot());
+    @Test
+    public void getBestseller() {
+        System.out.println(bookDao.getBestseller());
     }
 }

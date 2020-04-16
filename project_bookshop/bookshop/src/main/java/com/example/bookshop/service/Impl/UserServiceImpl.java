@@ -5,8 +5,13 @@ import com.example.bookshop.domain.User;
 import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
+import com.example.bookshop.exception.UserException;
 import com.example.bookshop.service.UserService;
+import com.example.bookshop.util.MD5Util;
 import com.example.bookshop.util.StringFormatUtil;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +37,7 @@ public class UserServiceImpl implements UserService {
 
         int result;
         try {
+            user.setPassword(MD5Util.md5Encryption(user.getPassword()));    //进行密码加密
             result = userDao.add(user);
         } catch (Exception e) {
             System.out.println("添加用户失败");
@@ -45,7 +51,7 @@ public class UserServiceImpl implements UserService {
     public void delete(Serializable id) throws DeleteException {
         if (userDao.findOneById(id) == null) throw new DeleteException("删除用户错误：用户为空");
 
-        int result = 0;
+        int result;
         try {
             result = userDao.delete(id);
         } catch (Exception e) {
@@ -60,7 +66,7 @@ public class UserServiceImpl implements UserService {
     public void update(User user) throws UpdateException {
         if (user == null) throw new UpdateException("更新用户错误：用户为空");
 
-        int result = 0;
+        int result;
         try {
             result = userDao.update(user);
         } catch (Exception e) {
@@ -82,5 +88,26 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userDao.findAll();
     }
+
+    @Override
+    public void login(Serializable id, String password) throws UserException {
+        User user = findOneById(id);
+
+        if (user != null)  {
+            String tmpPsw = MD5Util.md5Encryption(password);
+            if (!tmpPsw.equals(user.getPassword())) {
+                throw new UserException("登录错误：账号/密码不正确");
+            }
+        } else {
+            throw new UserException("登录错误：账号/密码不正确");
+        }
+
+        UsernamePasswordToken token = new UsernamePasswordToken((String) id, password);
+        Subject curUser = SecurityUtils.getSubject();
+        curUser.login(token);
+        curUser.getSession().setAttribute("curUser", user);
+        curUser.getSession().setAttribute("curAuthority", user.getAuthority());
+    }
+
 
 }

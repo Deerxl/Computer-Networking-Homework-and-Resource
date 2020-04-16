@@ -4,6 +4,7 @@ import com.example.bookshop.domain.User;
 import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
+import com.example.bookshop.exception.UserException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -32,8 +33,8 @@ public interface UserService extends BaseService<User> {
 
     /**
      * 通过ID查找一个用户
-     * @param id    待查询的对象的ID
-     * @return  返回该ID对应的对象
+     * @param id 待查询的对象的ID
+     * @return 返回该ID对应的对象
      */
     User findOneById(Serializable id);
 
@@ -42,4 +43,6 @@ public interface UserService extends BaseService<User> {
      * @return  返回对象集合
      */
     List<User> findAll();
+
+    void login(Serializable id, String password) throws UserException;
 }

@@ -1,8 +1,8 @@
 package com.example.bookshop.util;
 
 public class ReturnMsgUtil {
-    public int state;   //状态：0：成功，1：失败
-    public String message;  //相关信息
+    private int state;   //状态：0：成功，1：失败
+    private String message;  //相关信息
 
     public int getStateCode() {
         return state;
@@ -27,7 +27,7 @@ public class ReturnMsgUtil {
 
     @Override
     public String toString() {
-        return "ReMsgUtil{" +
+        return "ReturnMsgUtil{" +
                 "state=" + state +
                 ", message='" + message + '\'' +
                 '}';

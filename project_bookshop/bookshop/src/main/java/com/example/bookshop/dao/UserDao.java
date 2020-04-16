@@ -51,4 +51,5 @@ public interface UserDao extends BaseDao<User> {
      */
     @Select("SELECT * FROM user")
     List<User> findAll();
+
 }

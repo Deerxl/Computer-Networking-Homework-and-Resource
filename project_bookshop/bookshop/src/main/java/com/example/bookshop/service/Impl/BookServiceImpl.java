@@ -1,6 +1,7 @@
 package com.example.bookshop.service.Impl;
 
 import com.example.bookshop.dao.BookDao;
+import com.example.bookshop.dao.TypeDao;
 import com.example.bookshop.domain.Book;
 import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
@@ -11,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
     @Autowired
-    BookDao bookDao;
+    private BookDao bookDao;
+    @Autowired
+    private TypeDao typeDao;
 
     /**
      * 添加书籍。检查书籍是否为空、id/书名/价格/作者是否为空，id是否已被注册，手机号格式、图片地址、价格范围等是否正确
@@ -27,25 +31,18 @@ public class BookServiceImpl implements BookService {
     public void add(Book book) throws AddException {
         if (book == null) {
             throw new AddException("添加书籍错误：书籍为空");
-        } else if (StringFormatUtil.hasEmpty(book.getId())
-                || StringFormatUtil.hasEmpty(book.getName())
+        } else if (StringFormatUtil.hasEmpty(book.getName())
                 || StringFormatUtil.hasEmpty(book.getAuthor())) {
-            throw new AddException("添加书籍错误：书籍id含空/书名含空/作者含空/价格含空");
-        } else if (bookDao.findOneById(book.getId()) != null) {
-            throw new AddException("添加书籍错误：书籍id已被注册");
+            throw new AddException("添加书籍错误：书名含空/作者含空/价格含空");
         } else if (StringFormatUtil.isDouble(String.valueOf(book.getPrice())) || book.getPrice() < 0) {
             throw new AddException("添加书籍错误：价格格式/范围不正确");
-        } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage())) {
+        } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage().toString())) {
             throw new AddException("添加书籍错误：图片地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
-        } else if (book.getHot() > 2 || book.getHot() < 0) {
-            throw new AddException("添加书籍错误：热门范围不正确，应为0-2，0：未知 1：不热门 2：热门");
-        } else if (book.getState() > 2 || book.getState() < 0) {
-            throw new AddException("添加书籍错误：书籍状态不正确，应为0-2，状态：0：在售 1：下架；2：预售");
         } else if (book.getScore() < 0 || book.getScore() > 10) {
             throw new AddException("添加书籍错误：书籍评分不正确，应为0-10");
         }
 
-        int result = 0;
+        int result;
         try {
             result = bookDao.add(book);
         } catch (Exception e) {
@@ -58,11 +55,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(Serializable id) throws DeleteException {
-        if (id == null){
+        if (id == null) {
             throw new DeleteException("删除书籍错误：书籍为空");
         }
 
-        int result = 0;
+        int result;
         try {
             result = bookDao.delete(id);
         } catch (Exception e) {
@@ -86,17 +83,13 @@ public class BookServiceImpl implements BookService {
             throw new UpdateException("更新书籍错误：书名含空/作者含空/价格含空");
         } else if (StringFormatUtil.isDouble(String.valueOf(book.getPrice())) || book.getPrice() < 0) {
             throw new UpdateException("更新书籍错误：价格格式/范围不正确");
-        } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage())) {
+        } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage().toString())) {
             throw new UpdateException("更新书籍错误：图片地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
-        } else if (book.getHot() > 2 || book.getHot() < 0) {
-            throw new UpdateException("更新书籍错误：热门范围不正确，应为0-2，0：未知 1：不热门 2：热门");
-        } else if (book.getState() > 2 || book.getState() < 0) {
-            throw new UpdateException("更新书籍错误：书籍状态不正确，应为0-2，状态：0：在售 1：下架；2：预售");
         } else if (book.getScore() < 0 || book.getScore() > 10) {
             throw new UpdateException("更新书籍错误：书籍评分不正确，应为0-10");
         }
 
-        int result = 0;
+        int result;
         try {
             result = bookDao.update(book);
         } catch (Exception e) {
@@ -140,12 +133,45 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findHot() {
-        return bookDao.findHot();
+    public List<Book> findBooksByType(int type) {
+        return bookDao.findBooksByType(type);
     }
 
     @Override
-    public List<Book> findBooksByType(int type) {
-        return bookDao.findBooksByType(type);
+    public int findMaxId() {
+        return bookDao.findMaxId();
+    }
+
+    @Override
+    public List<Book> getCarouselBooks() {
+        return bookDao.getCarouselBooks();
+    }
+
+    @Override
+    public List<Book> getBestseller() {
+        return bookDao.getBestseller();
+    }
+
+    @Override
+    public List<Book> getHighScoreBooks(int index) {
+        if (index < 0) {
+            return bookDao.getHighScoreBooks(0);
+        }
+        else if (4 * index + 4 < getBookCount()) {
+            return bookDao.getHighScoreBooks(index);
+        }
+        else {
+            return bookDao.getHighScoreBooks(index % (getBookCount() / 4));
+        }
+    }
+
+    @Override
+    public int getBookCount() {
+        return bookDao.getBookCount();
+    }
+
+    @Override
+    public List<Book> getBooksByType() {
+        return bookDao.getBooksByType();
     }
 }

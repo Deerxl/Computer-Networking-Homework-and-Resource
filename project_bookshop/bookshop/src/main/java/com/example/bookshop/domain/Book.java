@@ -1,6 +1,7 @@
 package com.example.bookshop.domain;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.time.Year;
 
 /**
@@ -12,44 +13,42 @@ import java.time.Year;
  -- ----------------------------
  DROP TABLE IF EXISTS `book`;
  CREATE TABLE `book`  (
- `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'id，要求：不允许含任何空格',
+ `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id，要求：不允许含任何空格',
  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书籍名称，要求：不允许含任何空格',
  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作者，要求：不允许含任何空格',
- `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片地址，支持相对/绝对路径，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif',
  `price` double(10, 2) NOT NULL COMMENT '价格，要求：不小于0',
- `type` tinyint(4) NULL DEFAULT NULL COMMENT '类型：1：未分类',
+ `press` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '未知' COMMENT '出版社，默认\"未知\"',
+ `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片地址，支持相对/绝对路径，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif',
+ `type` tinyint(3) NULL DEFAULT 1 COMMENT '类型：1：未分类',
  `score` double(4, 2) NULL DEFAULT 10.00 COMMENT '评分：[0, 10]',
  `intro` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '无' COMMENT '简介，默认\"无\"',
  `nation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '未知' COMMENT '国家，默认\"未知\"',
  `year` year NULL DEFAULT NULL COMMENT '年份，默认NULL',
- `hot` tinyint(3) UNSIGNED NULL DEFAULT 0 COMMENT '热门：0：未知 1：不热门 2：热门，默认0',
- `state` tinyint(3) NULL DEFAULT 0 COMMENT '状态：0：在售 1：下架；2：预售',
  PRIMARY KEY (`id`) USING BTREE,
  INDEX `fk_book_type`(`type`) USING BTREE,
  CONSTRAINT `fk_book_type` FOREIGN KEY (`type`) REFERENCES `type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
- ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+ ) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
  SET FOREIGN_KEY_CHECKS = 1;
  */
 public class Book implements Serializable {
-    private String id;
+    private int id;
     private String name;
     private String author;
-    private String image;
     private double price;
+    private String press;
+    private String image;
     private int type;
     private double score;
     private String intro;
     private String nation;
     private Year year;
-    private int hot;
-    private int state;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -69,20 +68,28 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPress() {
+        return press;
+    }
+
+    public void setPress(String press) {
+        this.press = press;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getType() {
@@ -125,37 +132,20 @@ public class Book implements Serializable {
         this.year = year;
     }
 
-    public int getHot() {
-        return hot;
-    }
-
-    public void setHot(int hot) {
-        this.hot = hot;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
-                ", image='" + image + '\'' +
                 ", price=" + price +
+                ", press='" + press + '\'' +
+                ", image='" + image + '\'' +
                 ", type=" + type +
                 ", score=" + score +
                 ", intro='" + intro + '\'' +
                 ", nation='" + nation + '\'' +
                 ", year=" + year +
-                ", hot=" + hot +
-                ", state=" + state +
                 '}';
     }
 }

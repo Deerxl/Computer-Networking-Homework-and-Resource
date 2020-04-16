@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 此类未被使用，暂时留作备用
+ */
 public class MapperUtil {
     /**
      * 书籍类型

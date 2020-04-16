@@ -5,6 +5,7 @@ import com.example.bookshop.exception.AddException;
 import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.BookService;
+import com.example.bookshop.service.SalesService;
 import com.example.bookshop.util.ReturnMsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import java.util.List;
 public class BookController implements BaseController<Book>{
     @Autowired
     private BookService bookService;
+    @Autowired
+    private SalesService salesService;
 
     /**
      * 添加书籍 URL: /book/add
@@ -30,7 +33,7 @@ public class BookController implements BaseController<Book>{
     public ReturnMsgUtil add(Book book) {
         try {
             bookService.add(book);
-            return new ReturnMsgUtil(successCode, "success");
+            return new ReturnMsgUtil(successCode, String.valueOf(book.getId()));
         } catch (AddException e) {
             return new ReturnMsgUtil(failCode, e.getMessage());
         }
@@ -107,21 +110,24 @@ public class BookController implements BaseController<Book>{
     }
 
     /**
-     * 查找所有的热门书籍  URL: /book/findHot
-     * @return 所有热门书籍
-     */
-    @RequestMapping("/findHot")
-    public List<Book> findHot() {
-        return bookService.findHot();
-    }
-
-    /**
      * 查找某一类型的书籍 URL：/book/findByType
      * @param type 类型值
      * @return  书籍集合
      */
-    @RequestMapping("/findByType")
+    @RequestMapping(value = "/findByType", method = RequestMethod.GET)
     public List<Book> findBooksByType(@RequestParam("type") int type) {
         return bookService.findBooksByType(type);
+    }
+
+    /**
+     * 通过id查找某一本书的库存 /book/getStock
+     * @param id id
+     * @return 余量，书籍不存在时返回0
+     */
+    @RequestMapping(value = "/getStock", method = RequestMethod.GET)
+    public int getStock(@RequestParam("id") Serializable id) {
+        if (salesService.findOneById(id) == null) return 0;
+
+        return salesService.findStockById(id);
     }
 }
