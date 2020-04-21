@@ -94,14 +94,15 @@ public interface BookDao extends BaseDao<Book> {
     List<Book> getCarouselBooks();
 
     /**
-     * 首页热销书籍列表，十本书，需要id，name，image
-     * @return 十本热销书籍
+     * 首页热销书籍列表，n本书，需要id，name，image
+     * @param count 需要n本书
+     * @return n本热销书籍
      */
     @Select("SELECT book.id, `name`, `image` FROM book, orderitem " +
             "WHERE book.id = orderitem.book " +
             "GROUP BY orderitem.book " +
-            "ORDER BY SUM( count ) DESC LIMIT 10 ")
-    List<Book> getBestseller();
+            "ORDER BY SUM( count ) DESC LIMIT #{count}")
+    List<Book> getBestseller(int count);
 
     /**
      * 首页热门/猜你喜欢书籍列表-换一批，需要id，name，image，每次四本。为方便起见，按分数排序
@@ -128,5 +129,60 @@ public interface BookDao extends BaseDao<Book> {
             "ORDER BY type, score DESC")
     List<Book> getBooksByType();
 
+    /**
+     * 获取书籍国家
+     * @return 书籍国家列表
+     */
+    @Select("SELECT DISTINCT nation FROM `book`")
+    List<String> getCountries();
 
+    /**
+     * 根据国家查找书籍
+     * @param nation 单个或多个国家，以英文逗号分离
+     * @return 待查找的书籍
+     */
+    @Select("SELECT * FROM book WHERE nation IN (${nation})")
+    List<Book> findBooksByNation(String nation);
+
+    /**
+     * 根据评分查询书籍 [score1, score2]
+     * @param score1 评分下限
+     * @param score2 评分上限
+     * @return 评分在[score1, score2]的书籍
+     */
+    @Select("SELECT * FROM book WHERE score >= #{score1} AND score <= #{score2}")
+    List<Book> findScoreRangeIn(double score1, double score2);
+
+    /**
+     * 通过书籍名称模糊查询
+     * @param name 书籍名称
+     * @return 书籍列表
+     */
+    @Select("SELECT * FROM `book` WHERE `name` LIKE #{name}")
+    List<Book> findByLikeName(String name);
+
+    /**
+     * 获取一种或多种类型的书籍
+     * @param types 类型，以英文逗号隔开
+     * @return 书籍列表
+     */
+    @Select("SELECT * FROM book WHERE type IN (${types})")
+    List<Book> findByTypes(String types);
+
+    /**
+     * 获取属性在double[][2]范围之间的书籍
+     * @param str 将double[][2]转换成string后的字符串
+     * @return 书籍列表
+     */
+    @Select("SELECT * FROM book WHERE ${str}")
+    List<Book> findRangeInDoubleArr(String str);
+
+    /**
+     * 获取某一类型的书籍，按分数从高到低排序，取前count本
+     * @param type 类型
+     * @param count 限制取几本
+     * @return count本type的书
+     */
+    @Select("SELECT id, name, image, type FROM book WHERE type = #{type} ORDER BY score DESC LIMIT #{count}")
+    List<Book> findByTypeOrderByScore(int type, int count);
 }

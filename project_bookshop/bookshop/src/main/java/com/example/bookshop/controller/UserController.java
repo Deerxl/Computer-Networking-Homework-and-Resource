@@ -7,10 +7,7 @@ import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.UserService;
 import com.example.bookshop.util.ReturnMsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -28,7 +25,7 @@ public class UserController implements BaseController<User> {
      */
     @Override
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ReturnMsgUtil add(User user) {
+    public ReturnMsgUtil add(@RequestBody User user) {
         try {
             userService.add(user);
             return new ReturnMsgUtil(successCode, "success");
@@ -60,7 +57,7 @@ public class UserController implements BaseController<User> {
      */
     @Override
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public ReturnMsgUtil update(User user) {
+    public ReturnMsgUtil update(@RequestBody User user) {
         try {
             userService.update(user);
             return new ReturnMsgUtil(successCode, "success");
@@ -76,7 +73,7 @@ public class UserController implements BaseController<User> {
      */
     @Override
     @RequestMapping(value = "/findOneById", method = RequestMethod.GET)
-    public User findOneById(Serializable id) {
+    public User findOneById(@RequestParam(value = "id") Serializable id) {
         return userService.findOneById(id);
     }
 

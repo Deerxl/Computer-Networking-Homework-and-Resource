@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
         int result;
         try {
-            user.setPassword(MD5Util.md5Encryption(user.getPassword()));    //进行密码加密
+            //user.setPassword(MD5Util.md5Encryption(user.getPassword()));    //进行密码加密
             result = userDao.add(user);
         } catch (Exception e) {
             System.out.println("添加用户失败");
@@ -94,20 +94,26 @@ public class UserServiceImpl implements UserService {
         User user = findOneById(id);
 
         if (user != null)  {
-            String tmpPsw = MD5Util.md5Encryption(password);
-            if (!tmpPsw.equals(user.getPassword())) {
+            //String tmpPsw = MD5Util.md5Encryption(password);
+            //if (!tmpPsw.equals(user.getPassword())) {
+            //    throw new UserException("登录错误：账号/密码不正确");
+            //}
+            if (!password.equals(user.getPassword())) {
                 throw new UserException("登录错误：账号/密码不正确");
             }
         } else {
             throw new UserException("登录错误：账号/密码不正确");
         }
 
-        UsernamePasswordToken token = new UsernamePasswordToken((String) id, password);
-        Subject curUser = SecurityUtils.getSubject();
-        curUser.login(token);
-        curUser.getSession().setAttribute("curUser", user);
-        curUser.getSession().setAttribute("curAuthority", user.getAuthority());
+        //UsernamePasswordToken token = new UsernamePasswordToken((String) id, password);
+        //Subject curUser = SecurityUtils.getSubject();
+        //curUser.login(token);
+        //curUser.getSession().setAttribute("curUser", user);
+        //curUser.getSession().setAttribute("curAuthority", user.getAuthority());
     }
 
-
+    @Override
+    public int getAuthorityById(Serializable id) {
+        return userDao.getAuthorityById(id);
+    }
 }

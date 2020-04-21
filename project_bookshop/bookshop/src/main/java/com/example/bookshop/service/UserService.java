@@ -44,5 +44,8 @@ public interface UserService extends BaseService<User> {
      */
     List<User> findAll();
 
+
+    int getAuthorityById(Serializable id);
+
     void login(Serializable id, String password) throws UserException;
 }

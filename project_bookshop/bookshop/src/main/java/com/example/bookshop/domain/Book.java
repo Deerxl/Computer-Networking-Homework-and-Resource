@@ -3,6 +3,7 @@ package com.example.bookshop.domain;
 import java.io.Serializable;
 import java.sql.Blob;
 import java.time.Year;
+import java.util.Objects;
 
 /**
  SET NAMES utf8mb4;
@@ -147,5 +148,18 @@ public class Book implements Serializable {
                 ", nation='" + nation + '\'' +
                 ", year=" + year +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

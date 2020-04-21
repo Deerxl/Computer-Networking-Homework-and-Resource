@@ -31,14 +31,16 @@ public class StringFormatUtilTest {
         String str1 = null;
         String str2 = "";
         String str3 = "12345678910";
-        String str4 = "17362447820";
+        String str4 = "1736247820";
         String str5 = "12345678";
+        String str6 = "17362447819";
 
         assertFalse(StringFormatUtil.isPhoneNum(str1));
         assertFalse(StringFormatUtil.isPhoneNum(str2));
         assertFalse(StringFormatUtil.isPhoneNum(str3));
-        assertTrue(StringFormatUtil.isPhoneNum(str4));
+        assertFalse(StringFormatUtil.isPhoneNum(str4));
         assertFalse(StringFormatUtil.isPhoneNum(str5));
+        assertTrue(StringFormatUtil.isPhoneNum(str6));
     }
 
     @Test
@@ -104,5 +106,25 @@ public class StringFormatUtilTest {
         assertTrue(StringFormatUtil.isImage(str10));
         assertFalse(StringFormatUtil.isImage(str11));
         assertFalse(StringFormatUtil.isImage(str12));
+    }
+
+    @Test
+    public void doubleArrToSqlRangeIn() {
+        double[][] arr = new double[][]{{20,30},{200,300}};
+        String str = "price BETWEEN 20.0 AND 30.0 OR price BETWEEN 200.0 AND 300.0";
+        assertEquals(str, StringFormatUtil.doubleArrToSqlRangeIn(arr, "price"));
+    }
+
+    @Test
+    public void splitWebStrArr() {
+        String[] str = new String[]{"2.0,3.5", "3,4"};
+        double[][] result = new double[][]{{2.0,3.5},{3,4}};
+        assertEquals(StringFormatUtil.splitWebStrArr(str), result);
+    }
+
+    @Test
+    public void addLikeSymbol() {
+        String str = "平";
+        assertEquals("%平%", StringFormatUtil.addLikeSymbol(str));
     }
 }

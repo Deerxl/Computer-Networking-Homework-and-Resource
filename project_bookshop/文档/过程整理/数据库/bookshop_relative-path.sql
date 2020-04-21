@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 13/04/2020 17:08:33
+ Date: 17/04/2020 01:39:16
 */
 
 SET NAMES utf8mb4;
@@ -33,6 +33,10 @@ CREATE TABLE `address`  (
 -- ----------------------------
 -- Records of address
 -- ----------------------------
+INSERT INTO `address` VALUES ('1', '中国', '湖北', '武汉', '洪山区武汉大学信息学部国际软件学院');
+INSERT INTO `address` VALUES ('2', '中国', '湖北', '潜江', '园林办事处');
+INSERT INTO `address` VALUES ('3', '中国', '北京', '北京', '北京大学');
+INSERT INTO `address` VALUES ('4', '中国', '福建', '厦门', '厦门大学思明校区');
 
 -- ----------------------------
 -- Table structure for book
@@ -53,7 +57,7 @@ CREATE TABLE `book`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_book_type`(`type`) USING BTREE,
   CONSTRAINT `fk_book_type` FOREIGN KEY (`type`) REFERENCES `type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of book
@@ -67,6 +71,7 @@ INSERT INTO `book` VALUES (6, '万历十五年', '黄仁宇', 18.00, '生活·�
 INSERT INTO `book` VALUES (7, '红楼梦', '曹雪芹 / 高鹗', 18.50, '岳麓书社', 'static/images/book-red-dream.jpg', 8, 9.60, '《红楼梦》是一部中国末期封建社会的百科全书。小说以上层贵族社会为中心图画，真实、生动地描写了十八世纪上半叶中国末期封建社会的全部生活，是这段历史生活的一面镜子和缩影，是中国古老封建社会已经无可挽回地走向崩溃的真实写照。《红楼梦》之所以成为“中国小说文学难以征服的顶峰”，不仅仅是因为它具有很高的思想价值，还在于它非凡的艺术成就。全书规模宏伟，结构严谨，人物生动，语言优美。此外还有一些明显的艺术特点值得后人品味、鉴赏。《红楼梦》一书，通过对“贾、史、王、薛”四大家族荣衰的描写，展示了广阔的社会生活视野，森罗万象，囊括了多姿多彩的世俗人情。人称《红楼梦》内蕴着一个时代的历史容量，是封建末世的百科全书。\r\n\r\n', '中国', 1999);
 INSERT INTO `book` VALUES (8, '三体', '刘慈欣', 23.00, '重庆出版社', 'static/images/book-three-body.jpg', 8, 8.80, '文化大革命如火如荼进行的同时。军方探寻外星文明的绝秘计划“红岸工程”取得了突破性进展。但在按下发射键的那一刻，历经劫难的叶文洁没有意识到，她彻底改变了人类的命运。地球文明向宇宙发出的第一声啼鸣，以太阳为中心，以光速向宇宙深处飞驰……\r\n\r\n四光年外，“三体文明”正苦苦挣扎——三颗无规则运行的太阳主导下的百余次毁灭与重生逼迫他们逃离母星。而恰在此时。他们接收到了地球发来的信息。在运用超技术锁死地球人的基础科学之后。三体人庞大的宇宙舰队开始向地球进发……\r\n\r\n人类的末日悄然来临。\r\n\r\n', '中国', 2008);
 INSERT INTO `book` VALUES (9, '失控', '凯文·凯利', 88.00, '新星出版社', 'static/images/book-out-of-control.jpg', 10, 8.70, '《失控》，全名为《失控：机器、社会与经济的新生物学》（Out of Control: The New Biology of Machines, Social Systems, and the Economic World）。\r\n\r\n2006年，《长尾》作者克里斯·安德森在亚马逊网站上这样评价该书：\r\n\r\n“这可能是90年代最重要的一本书”，并且是“少有的一年比一年卖得好的书”。“尽管书中的一些例子在十几年后可能有些过时，但（它们所表达的）信息却越来越成为真知灼见”。“在那时人们还无法想象博客和维基等大众智慧的突起，但凯利却分毫不差地预见到了。这可能是过去十年来最聪明的一本书。”\r\n\r\n这是一部思考人类社会（或更一般意义上的复杂系统）进化的“大部头”著作，对于那些不惧于“头脑体操”的读者来说，必然会开卷有益。\r\n\r\n《失控》成书于1994年，作者是《连线》杂志的创始主编凯文·...', '美国', 2010);
+INSERT INTO `book` VALUES (10, '西方科学的起源', '戴维·林德伯格', 78.00, '湖南科学技术出版社', 'static/images/book-the-beginnings-of-western-science.jpg', 10, 9.30, '本书是论述近代以前西方科学的权威教材，也是一部非常优秀的科学史读物。它结合欧洲科学传统的哲学、宗教和体制背景，用一本书的篇幅深入浅出地介绍了从古希腊到中世纪晚期各个方面的科学成就，竭力避免从今天的科学观点出发来理解古代成就。1992年本书第一版问世后好评如潮。2007年，作者对该书做了重要修订，几乎每一页都有增补和调整，特别是扩充了关于拜占庭科学、美索不达米亚天文学、中世纪的炼金术和占星术等方面的内容，关于伊斯兰科学的一章和讨论中世纪对16、17世纪科学发展贡献的最后一章则完全重写。中译本即根据新版译出。\r\n\r\n', '美国', 2013);
 INSERT INTO `book` VALUES (11, '白夜行', '东野圭吾', 29.80, '南海出版公司', 'static/images/book-day-nignt-walk.jpg', 8, 9.10, '“只希望能手牵手在太阳下散步”，这个象征故事内核的绝望念想，有如一个美丽的幌子，随着无数凌乱、压抑、悲凉的故事片段像纪录片一样一一还原：没有痴痴相思，没有海枯石烂，只剩下一个冰冷绝望的诡计，最后一丝温情也被完全抛弃，万千读者在一曲救赎罪恶的凄苦爱情中悲切动容……\r\n\r\n', '中国', 2008);
 INSERT INTO `book` VALUES (12, '不能承受的生命之轻', '米兰·昆德拉', 23.00, '上海译文出版社', 'static/images/book-life-weight.jpg', 8, 8.50, '《不能承受的生命之轻》是米兰·昆德拉最负盛名的作品。小说描写了托马斯与特丽莎、萨丽娜之间的感情生活。但它不是一个男人和两个女人的三角性爱故事，它是一部哲理小说，小说从“永恒轮回”的讨论开始，把读者带入了对一系列问题的思考中，比如轻与重、灵与肉。\r\n\r\n《不能承受的生命之轻》是一部意象繁复的书，其中装载了多种涵义：被政治化了的社会内涵的揭示、人性考察、个人命运在特定历史与政治语境下的呈现，以及对两性关系本质上的探索等。昆德拉将这些元素糅合在一起，写成一部非同凡响的小说——其中既有隐喻式的哲学思考，也有人的悲欢离合的生命历程的展现。', '捷克', 2003);
 INSERT INTO `book` VALUES (13, '社会心理学', '戴维·迈尔斯', 68.00, '人民邮电出版社', 'static/images/book-social-phychology.jpg', 13, 9.00, '《社会心理学》这本书被美国700多所大学或学院的心理系所采用，是这一领域的主导教材，已经成为评价其他教材的标准。\r\n\r\n这本书将基础研究与实践应用完美地结合在一起，以富有逻辑性的组织结构引领学生了解人们是如何思索、影响他人并与他人建立联系的。是人们了解自身、了解社会、了解自己与社会之间关系的最佳的指导性书籍。', '美国', 2006);
@@ -143,7 +148,7 @@ CREATE TABLE `cart`  (
   INDEX `fk_cart_book`(`book`) USING BTREE,
   CONSTRAINT `fk_cart_book` FOREIGN KEY (`book`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_cart_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cart
@@ -159,7 +164,7 @@ CREATE TABLE `order`  (
   `buyer` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '下单者',
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '地址',
   `receiver` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收货人',
-  `price` decimal(10, 2) NOT NULL COMMENT '总价',
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '总价',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_orderbuy_user`(`buyer`) USING BTREE,
   INDEX `fk_orderrcv_user`(`receiver`) USING BTREE,
@@ -172,6 +177,10 @@ CREATE TABLE `order`  (
 -- ----------------------------
 -- Records of order
 -- ----------------------------
+INSERT INTO `order` VALUES ('1', '2020-04-13 17:51:47', '10001', '1', '10002', NULL);
+INSERT INTO `order` VALUES ('2', '2020-04-13 17:59:57', '10002', '2', '10003', NULL);
+INSERT INTO `order` VALUES ('3', '2020-04-13 19:06:08', '10003', '3', '10004', NULL);
+INSERT INTO `order` VALUES ('4', '2020-04-13 19:09:41', '10004', '4', '10001', NULL);
 
 -- ----------------------------
 -- Table structure for orderitem
@@ -187,11 +196,31 @@ CREATE TABLE `orderitem`  (
   INDEX `fk_oneorder_book`(`book`) USING BTREE,
   CONSTRAINT `fk_oneorder_book` FOREIGN KEY (`book`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_oneorder_order` FOREIGN KEY (`order`) REFERENCES `order` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of orderitem
 -- ----------------------------
+INSERT INTO `orderitem` VALUES ('1', 9, 2, '1');
+INSERT INTO `orderitem` VALUES ('10', 70, 4, '2');
+INSERT INTO `orderitem` VALUES ('11', 21, 1, '3');
+INSERT INTO `orderitem` VALUES ('12', 33, 2, '3');
+INSERT INTO `orderitem` VALUES ('13', 35, 2, '3');
+INSERT INTO `orderitem` VALUES ('14', 67, 4, '3');
+INSERT INTO `orderitem` VALUES ('15', 43, 2, '3');
+INSERT INTO `orderitem` VALUES ('16', 46, 3, '4');
+INSERT INTO `orderitem` VALUES ('17', 39, 3, '4');
+INSERT INTO `orderitem` VALUES ('18', 43, 1, '4');
+INSERT INTO `orderitem` VALUES ('19', 24, 2, '4');
+INSERT INTO `orderitem` VALUES ('2', 7, 1, '1');
+INSERT INTO `orderitem` VALUES ('20', 70, 3, '4');
+INSERT INTO `orderitem` VALUES ('3', 8, 1, '1');
+INSERT INTO `orderitem` VALUES ('4', 23, 5, '1');
+INSERT INTO `orderitem` VALUES ('5', 54, 3, '1');
+INSERT INTO `orderitem` VALUES ('6', 32, 2, '2');
+INSERT INTO `orderitem` VALUES ('7', 12, 3, '2');
+INSERT INTO `orderitem` VALUES ('8', 65, 2, '2');
+INSERT INTO `orderitem` VALUES ('9', 31, 2, '2');
 
 -- ----------------------------
 -- Table structure for sales
@@ -203,7 +232,7 @@ CREATE TABLE `sales`  (
   `state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '状态：0：在售；1：下架；2：预售',
   `hot` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '热门：0：未知；1：不热门；2：热门，默认0',
   PRIMARY KEY (`book`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 460 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 461 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sales
@@ -217,6 +246,7 @@ INSERT INTO `sales` VALUES (6, 54, 0, 2);
 INSERT INTO `sales` VALUES (7, 6, 0, 2);
 INSERT INTO `sales` VALUES (8, 454, 0, 2);
 INSERT INTO `sales` VALUES (9, 43, 0, 2);
+INSERT INTO `sales` VALUES (10, 0, 0, 0);
 INSERT INTO `sales` VALUES (11, 65, 0, 2);
 INSERT INTO `sales` VALUES (12, 87, 0, 2);
 INSERT INTO `sales` VALUES (13, 54, 0, 2);
@@ -288,7 +318,7 @@ CREATE TABLE `type`  (
   `cname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '中文类型名',
   `ename` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '英文类型名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '书籍类型' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '书籍类型' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of type
@@ -324,7 +354,10 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('10000', 'admin', '123456', '17362447820', 0);
-INSERT INTO `user` VALUES ('10001', 'guest', '123456', '17362447821', 1);
+INSERT INTO `user` VALUES ('10001', 'guest1', '123456', '17362447821', 1);
+INSERT INTO `user` VALUES ('10002', 'guest2', '123456', '17362447822', 1);
+INSERT INTO `user` VALUES ('10003', 'guest3', '123456', '17362447823', 1);
+INSERT INTO `user` VALUES ('10004', 'guest4', '123456', '17362447824', 1);
 
 -- ----------------------------
 -- Triggers structure for table book

@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -36,7 +35,7 @@ public class BookServiceImpl implements BookService {
             throw new AddException("添加书籍错误：书名含空/作者含空/价格含空");
         } else if (StringFormatUtil.isDouble(String.valueOf(book.getPrice())) || book.getPrice() < 0) {
             throw new AddException("添加书籍错误：价格格式/范围不正确");
-        } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage().toString())) {
+        } else if (book.getImage() != null && !StringFormatUtil.isImage(book.getImage())) {
             throw new AddException("添加书籍错误：图片地址/格式不正确，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif");
         } else if (book.getScore() < 0 || book.getScore() > 10) {
             throw new AddException("添加书籍错误：书籍评分不正确，应为0-10");
@@ -148,8 +147,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getBestseller() {
-        return bookDao.getBestseller();
+    public List<Book> getBestseller(int count) {
+        return bookDao.getBestseller(count);
     }
 
     @Override
@@ -173,5 +172,76 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getBooksByType() {
         return bookDao.getBooksByType();
+    }
+
+    @Override
+    public List<String> getCountries() {
+        return bookDao.getCountries();
+    }
+
+    @Override
+    public List<Book> findBooksByNation(String[] nations) {
+        if (nations == null || nations.length == 0) return null;
+
+        String nation = StringFormatUtil.StrArrToSqlIn(nations);
+        return bookDao.findBooksByNation(nation);
+    }
+
+    @Override
+    public List<Book> findScoreRangeIn(double score1, double score2) {
+        return bookDao.findScoreRangeIn(score1, score2);
+    }
+
+    @Override
+    public List<Book> findByLikeName(String name) {
+        return bookDao.findByLikeName(StringFormatUtil.addLikeSymbol(name));
+    }
+
+    @Override
+    public List<Book> findByTypes(int[] types) {
+        String str = StringFormatUtil.intArrToSqlIn(types);
+        return bookDao.findByTypes(str);
+    }
+
+    @Override
+    public List<Book> findRangeInDoubleArr(double[][] arr, String attribute) {
+        String str = StringFormatUtil.doubleArrToSqlRangeIn(arr, attribute);
+        if (str == null) return null;
+        return bookDao.findRangeInDoubleArr(str);
+    }
+
+    @Override
+    public List<Book> findByTypeOrderByScore(int type, int count) {
+        if (type <= 0 || count <= 0) return null;
+
+        return bookDao.findByTypeOrderByScore(type, count);
+    }
+
+    @Override
+    public Map<String, List<Book>> getHomePageGroupByType(int count) {
+        Map<String, List<Book>> result = new HashMap<>();
+
+        int typeCount = typeDao.getTypeCount();
+        int[] typeIds = typeDao.getTypeIds();
+        for (int i = 0; i < typeCount; i++) {
+            int typeKey = typeIds[i];
+            List<Book> books = findByTypeOrderByScore(typeKey, count);
+            if (books.size() > 0) {
+                String eName = typeDao.getENameById(typeKey);
+                result.put(eName, books);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<Book> findSearchBooks(int[] types, String[] nations, String[] prices, String[] scores, String name) {
+        List<Book> books = findByTypes(types);
+        books.retainAll(findBooksByNation(nations));
+        books.retainAll(findRangeInDoubleArr(StringFormatUtil.splitWebStrArr(prices), "price"));
+        books.retainAll(findRangeInDoubleArr(StringFormatUtil.splitWebStrArr(scores), "score"));
+        books.retainAll(findByLikeName(name));
+
+        return books;
     }
 }

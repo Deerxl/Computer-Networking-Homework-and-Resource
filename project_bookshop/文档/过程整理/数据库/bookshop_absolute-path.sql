@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : local
+ Source Server         : MySQL
  Source Server Type    : MySQL
- Source Server Version : 50727
+ Source Server Version : 80015
  Source Host           : localhost:3306
- Source Schema         : bookshop1
+ Source Schema         : bookshop
 
  Target Server Type    : MySQL
- Target Server Version : 50727
+ Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 15/04/2020 00:30:49
+ Date: 17/04/2020 14:10:54
 */
 
 SET NAMES utf8mb4;
@@ -21,40 +21,43 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for address
 -- ----------------------------
 DROP TABLE IF EXISTS `address`;
-CREATE TABLE `address` (
-  `id` varchar(255) NOT NULL,
-  `nation` varchar(255) NOT NULL DEFAULT '中国' COMMENT '国家',
-  `province` varchar(255) NOT NULL DEFAULT '湖北' COMMENT '省份',
-  `city` varchar(255) NOT NULL DEFAULT '武汉' COMMENT '县市',
-  `details` varchar(255) NOT NULL DEFAULT '洪山区武汉大学信息学部国际软件学院' COMMENT '详细地址',
+CREATE TABLE `address`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `nation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '中国' COMMENT '国家',
+  `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '湖北' COMMENT '省份',
+  `city` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '武汉' COMMENT '县市',
+  `details` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '洪山区武汉大学信息学部国际软件学院' COMMENT '详细地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of address
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for book
 -- ----------------------------
 DROP TABLE IF EXISTS `book`;
-CREATE TABLE `book` (
+CREATE TABLE `book`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id，要求：不允许含任何空格',
-  `name` varchar(255) NOT NULL COMMENT '书籍名称，要求：不允许含任何空格',
-  `author` varchar(255) NOT NULL COMMENT '作者，要求：不允许含任何空格',
-  `price` double(10,2) NOT NULL COMMENT '价格，要求：不小于0',
-  `press` varchar(255) DEFAULT '未知' COMMENT '出版社，默认"未知"',
-  `image` varchar(255) DEFAULT NULL COMMENT '图片地址，支持相对/绝对路径，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif',
-  `type` tinyint(3) DEFAULT '1' COMMENT '类型：1：未分类',
-  `score` double(4,2) DEFAULT '10.00' COMMENT '评分：[0, 10]',
-  `intro` varchar(1000) DEFAULT '无' COMMENT '简介，默认"无"',
-  `nation` varchar(255) DEFAULT '未知' COMMENT '国家，默认"未知"',
-  `year` year(4) DEFAULT NULL COMMENT '年份，默认NULL',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '书籍名称，要求：不允许含任何空格',
+  `author` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '作者，要求：不允许含任何空格',
+  `price` double(10, 2) NOT NULL COMMENT '价格，要求：不小于0',
+  `press` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '未知' COMMENT '出版社，默认\"未知\"',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片地址，支持相对/绝对路径，适用的图片格式为：bmp/gif/jpeg/jpg/png/raw/tif',
+  `type` tinyint(3) NULL DEFAULT 1 COMMENT '类型：1：未分类',
+  `score` double(4, 2) NULL DEFAULT 10.00 COMMENT '评分：[0, 10]',
+  `intro` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '无' COMMENT '简介，默认\"无\"',
+  `nation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '未知' COMMENT '国家，默认\"未知\"',
+  `year` year NULL DEFAULT NULL COMMENT '年份，默认NULL',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_book_type` (`type`) USING BTREE,
-  CONSTRAINT `fk_book_type` FOREIGN KEY (`type`) REFERENCES `type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  INDEX `fk_book_type`(`type`) USING BTREE,
+  CONSTRAINT `fk_book_type` FOREIGN KEY (`type`) REFERENCES `type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of book
 -- ----------------------------
-BEGIN;
 INSERT INTO `book` VALUES (1, '平凡的世界', '路遥', 23.90, '未知', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-ordinary-world.jpg?Expires=1902241771&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=WZWOzZ1uaLI7KnKbpSRJHvRw9Ns%3D', 3, 9.00, '《平凡的世界》是中国作家路遥创作的一部百万字的小说。这是一部全景式地表现中国当代城乡社会生活的长篇小说，全书共三部。1986年12月首次出版。\r\n该书以中国70年代中期到80年代中期十年间为背景，通过复杂的矛盾纠葛，以孙少安和孙少平两兄弟为中心，刻画了当时社会各阶层众多普通人的形象；劳动与爱情、挫折与追求、痛苦与欢乐、日常生活与巨大社会冲突纷繁地交织在一起，深刻地展示了普通人在大时代历史进程中所走过的艰难曲折的道路。1991年3月，《平凡的世界》获中国第三届茅盾文学奖。2019年9月23日，该小说入选“新中国70年70部长篇小说典藏”。', '中国', 1986);
 INSERT INTO `book` VALUES (2, '乌合之众', '勒庞', 16.00, '中央编译出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-the-crowd.jpg?Expires=1902241773&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=X%2Bzm4bAW8GoEJgkcxN1R%2Fvd0lE4%3D', 3, 8.20, '古斯塔夫・勒庞 Gustave Le Bon(1841-1931) 法国著名社会心理学家。他自1894年始，写下一系列社会心理学著作，以本书最为著名；在社会心理学领域已有的著作中，最有影响的，也是这本并不很厚的《乌合之众》。古斯塔夫・勒庞在他在书中极为精致地描述了集体心态，对人们理解集体行为的作用以及对社会心理学的思考发挥了巨大影响。《乌合之众--大众心理研究》在西方已印至第29版，其观点新颖，语言生动，是群体行为的研究者不可不读的佳作。\r\n\r\n', '法国', 2011);
 INSERT INTO `book` VALUES (3, '如何阅读一本书', '莫提默·J. 艾德勒 / 查尔斯·范多伦', 38.00, '商务印书馆', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-how-to-read-a-book.jpg?Expires=1902241777&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=q1xEeoPKHNq2dXR0zgBEcb%2FlhZw%3D', 3, 8.40, '每本书的封面之下都有一套自己的骨架，作为一个分析阅读的读者，责任就是要找出这个骨架。一本书出现在面前时，肌肉包着骨头，衣服包裹着肌肉，可说是盛装而来。读者用不着揭开它的外衣或是撕去它的肌肉来得到在柔软表皮下的那套骨架，但是一定要用一双X光般的透视眼来看这本书，因为那是了解一本书、掌握其骨架的基础。\r\n\r\n《如何阅读一本书》初版于1940年，1972年大幅增订改写为新版。不懂阅读的人，初探阅读的人，读这本书可以少走冤枉路。对阅读有所体会的人，读这本书可以有更深的印证和领悟。', '美国', 2004);
@@ -64,6 +67,7 @@ INSERT INTO `book` VALUES (6, '万历十五年', '黄仁宇', 18.00, '生活·�
 INSERT INTO `book` VALUES (7, '红楼梦', '曹雪芹 / 高鹗', 18.50, '岳麓书社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-red-dream.jpg?Expires=1902241770&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=apETUPYtJkk3BRQv4OeRS3WAnYk%3D', 8, 9.60, '《红楼梦》是一部中国末期封建社会的百科全书。小说以上层贵族社会为中心图画，真实、生动地描写了十八世纪上半叶中国末期封建社会的全部生活，是这段历史生活的一面镜子和缩影，是中国古老封建社会已经无可挽回地走向崩溃的真实写照。《红楼梦》之所以成为“中国小说文学难以征服的顶峰”，不仅仅是因为它具有很高的思想价值，还在于它非凡的艺术成就。全书规模宏伟，结构严谨，人物生动，语言优美。此外还有一些明显的艺术特点值得后人品味、鉴赏。《红楼梦》一书，通过对“贾、史、王、薛”四大家族荣衰的描写，展示了广阔的社会生活视野，森罗万象，囊括了多姿多彩的世俗人情。人称《红楼梦》内蕴着一个时代的历史容量，是封建末世的百科全书。\r\n\r\n', '中国', 1999);
 INSERT INTO `book` VALUES (8, '三体', '刘慈欣', 23.00, '重庆出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-three-body.jpg?Expires=1902241776&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=FGACfzCrXvo6Ghq3L%2BBkl%2FRzjGM%3D', 8, 8.80, '文化大革命如火如荼进行的同时。军方探寻外星文明的绝秘计划“红岸工程”取得了突破性进展。但在按下发射键的那一刻，历经劫难的叶文洁没有意识到，她彻底改变了人类的命运。地球文明向宇宙发出的第一声啼鸣，以太阳为中心，以光速向宇宙深处飞驰……\r\n\r\n四光年外，“三体文明”正苦苦挣扎——三颗无规则运行的太阳主导下的百余次毁灭与重生逼迫他们逃离母星。而恰在此时。他们接收到了地球发来的信息。在运用超技术锁死地球人的基础科学之后。三体人庞大的宇宙舰队开始向地球进发……\r\n\r\n人类的末日悄然来临。\r\n\r\n', '中国', 2008);
 INSERT INTO `book` VALUES (9, '失控', '凯文·凯利', 88.00, '新星出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-out-of-control.jpg?Expires=1902241778&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=R0jrGSyQXcJNzcMyvqtZq1ux8lY%3D', 10, 8.70, '《失控》，全名为《失控：机器、社会与经济的新生物学》（Out of Control: The New Biology of Machines, Social Systems, and the Economic World）。\r\n\r\n2006年，《长尾》作者克里斯·安德森在亚马逊网站上这样评价该书：\r\n\r\n“这可能是90年代最重要的一本书”，并且是“少有的一年比一年卖得好的书”。“尽管书中的一些例子在十几年后可能有些过时，但（它们所表达的）信息却越来越成为真知灼见”。“在那时人们还无法想象博客和维基等大众智慧的突起，但凯利却分毫不差地预见到了。这可能是过去十年来最聪明的一本书。”\r\n\r\n这是一部思考人类社会（或更一般意义上的复杂系统）进化的“大部头”著作，对于那些不惧于“头脑体操”的读者来说，必然会开卷有益。\r\n\r\n《失控》成书于1994年，作者是《连线》杂志的创始主编凯文·...', '美国', 2010);
+INSERT INTO `book` VALUES (10, '西方科学的起源', '戴维·林德伯格', 78.00, '湖南科学技术出版社', 'https://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-the-beginnings-of-western-science.jpg', 10, 9.30, '本书是论述近代以前西方科学的权威教材，也是一部非常优秀的科学史读物。它结合欧洲科学传统的哲学、宗教和体制背景，用一本书的篇幅深入浅出地介绍了从古希腊到中世纪晚期各个方面的科学成就，竭力避免从今天的科学观点出发来理解古代成就。1992年本书第一版问世后好评如潮。2007年，作者对该书做了重要修订，几乎每一页都有增补和调整，特别是扩充了关于拜占庭科学、美索不达米亚天文学、中世纪的炼金术和占星术等方面的内容，关于伊斯兰科学的一章和讨论中世纪对16、17世纪科学发展贡献的最后一章则完全重写。中译本即根据新版译出。', '美国', 2013);
 INSERT INTO `book` VALUES (11, '白夜行', '东野圭吾', 29.80, '南海出版公司', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-day-nignt-walk.jpg?Expires=1902241770&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=xoq9ODEiBa9%2FtDrGJbM5OIQG7Ps%3D', 8, 9.10, '“只希望能手牵手在太阳下散步”，这个象征故事内核的绝望念想，有如一个美丽的幌子，随着无数凌乱、压抑、悲凉的故事片段像纪录片一样一一还原：没有痴痴相思，没有海枯石烂，只剩下一个冰冷绝望的诡计，最后一丝温情也被完全抛弃，万千读者在一曲救赎罪恶的凄苦爱情中悲切动容……\r\n\r\n', '中国', 2008);
 INSERT INTO `book` VALUES (12, '不能承受的生命之轻', '米兰·昆德拉', 23.00, '上海译文出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-life-weight.jpg?Expires=1902241775&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=i3LODmgTvrAXiHKWYcgmUXKMnys%3D', 8, 8.50, '《不能承受的生命之轻》是米兰·昆德拉最负盛名的作品。小说描写了托马斯与特丽莎、萨丽娜之间的感情生活。但它不是一个男人和两个女人的三角性爱故事，它是一部哲理小说，小说从“永恒轮回”的讨论开始，把读者带入了对一系列问题的思考中，比如轻与重、灵与肉。\r\n\r\n《不能承受的生命之轻》是一部意象繁复的书，其中装载了多种涵义：被政治化了的社会内涵的揭示、人性考察、个人命运在特定历史与政治语境下的呈现，以及对两性关系本质上的探索等。昆德拉将这些元素糅合在一起，写成一部非同凡响的小说——其中既有隐喻式的哲学思考，也有人的悲欢离合的生命历程的展现。', '捷克', 2003);
 INSERT INTO `book` VALUES (13, '社会心理学', '戴维·迈尔斯', 68.00, '人民邮电出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-social-phychology.jpg?Expires=1902241774&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=mRwnBZjk4Q%2BuByMIqGkCekGYIr8%3D', 13, 9.00, '《社会心理学》这本书被美国700多所大学或学院的心理系所采用，是这一领域的主导教材，已经成为评价其他教材的标准。\r\n\r\n这本书将基础研究与实践应用完美地结合在一起，以富有逻辑性的组织结构引领学生了解人们是如何思索、影响他人并与他人建立联系的。是人们了解自身、了解社会、了解自己与社会之间关系的最佳的指导性书籍。', '美国', 2006);
@@ -125,76 +129,86 @@ INSERT INTO `book` VALUES (68, '大学的精神', '蒲实 / 陈赛', 68.00, '中
 INSERT INTO `book` VALUES (69, '爱心与教育', '李镇西', 22.80, '漓江出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-love-and-education.jpg?Expires=1902241770&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=XyJtfm9aU6UphpFQy%2FMvhx%2Bv40o%3D', 11, 9.10, '《爱心与教育:素质教育探索手记(增补本)》是著名教育家李镇西的成名作、代表作。以手记的形式，叙述了李镇西老师教书育人的感人故事。学生汪斌的父亲执意留下一筐鸡蛋感谢李老师对儿子的关爱，李老师每天用小煤油炉煮上一个鸡蛋给汪斌送去。家境困难而品学兼优的宁玮善良节俭，李老师送钱给她补充营养。在高考以几分之差落榜后，宁玮情绪波劝很大，李老师一直鼓励她，八年如一日的通信，电话联络，成为宁玮成功人生的最大动力。父亲病逝，家庭欠债的伍建有了辍学的念头，李老师支持同学们给他捐款捐物。假期，李老师带着学生步行三十多里山路，来到伍建劳作的田头。齐声大喊：“伍—建—你—好!”伍建泪水长流。李老师教育“后进生”万同转化的过程，更像一个惊心动魄的传奇故事。\r\n\r\n', '中国', 2007);
 INSERT INTO `book` VALUES (70, '杀死一只知更鸟', '哈珀·李', 32.00, '译林出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-to-kill-a-mocking-bird.jpg?Expires=1902241777&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=SCkox3jFYUnNq9pEuNzzyxNAeR0%3D', 11, 9.20, '成长总是个让人烦恼的命题。成长有时会很缓慢，如小溪般唱着叮咚的歌曲趟过，有时却如此突如其来，如暴雨般劈头盖脸……三个孩子因为小镇上的几桩冤案经历了猝不及防的成长——痛苦与迷惑，悲伤与愤怒，也有温情与感动。这是爱与真知的成长经典。\r\n\r\n《杀死一只知更鸟》获1961年普利策奖。\r\n\r\n美国图书馆借阅率最高的书，英国青少年最喜爱的小说之一。\r\n\r\n美国中学推荐课外读物。\r\n\r\n由小说改编的电影获第25届奥斯卡三项大奖。\r\n\r\n美国电影协会评选的“100名银幕英雄与恶人”中，派克主演的芬奇律师名列英雄第一位。', '美国', 2012);
 INSERT INTO `book` VALUES (71, '教育与美好生活', '伯特兰•罗素', 40.00, '上海人民出版社', 'http://couseraccess.oss-cn-beijing.aliyuncs.com/bookshop/book-education-and-nice-life.jpg?Expires=1902241776&OSSAccessKeyId=LTAI0vAYGEPYTiJ1&Signature=3nnUtjt%2FoQgYmDQDa%2Fq77geJy0E%3D', 11, 9.30, '《教育与美好生活》这部教育名著篇幅不长，除一个简短的引言之外，总共十九章，分三篇。该书的前两章构成了第一篇，综论现代教育的基本原理和目的。民主可以说是罗素教育思想的一条门槛式原则，他开宗明义地提出“我们所追求的未来的教育体制必须给每个孩子提供现有的最佳机会”，“如果一种教育方法不可能普及，我们就无法将其视为令人满意的”。正是基于这种精神，他对传统的教育理论、英国贵族式的传统教育特别是公学制度多有反思和批评，希望采用蒙台梭利等现代教育家摸索出的理论和方法破旧立新。不过，他并未一概否定古典人文教育的合理性和重要性，而是指出这方面的教育一定要在内容上有所取舍、方法上有所改良，“人类知识的总量和人类问题的复杂性正在不断增长，因此每一代人都必须为了找时间学习新东西而改进其教育方法”。罗素推重的第二个基本原则是自由。他认为，绝不能像旧时那样通过恐吓、强迫甚或体罚来管束和训导儿童，而应该培养儿童的自律和主动。一方面要借助现代心理学知识来把握和利用儿童的心理特性，另一方面要传授真正有价值的知识来激发儿童的学习欲望。品性和美德的养成绝非依赖外在强制，也不能诉诸意志控制，而是取决于儿童早期确立的良好习惯，“好习惯几乎可以自动产生大部分美德”。在罗素看来，理想人格的基础是活力、勇敢、敏锐和理智等四种品性。他特别指出，传统教育的一大缺陷是轻视理智，而没有理智， “教育者们常常因为热衷于灌输所谓的正确信念而疏于对理智的训练”。即便时至今日，这样的提醒仍旧值得我们谨记。', '英国', 2017);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for cart
 -- ----------------------------
 DROP TABLE IF EXISTS `cart`;
-CREATE TABLE `cart` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `cart`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `book` int(11) NOT NULL AUTO_INCREMENT COMMENT '书籍',
   `count` int(11) NOT NULL COMMENT '数量',
-  `user` varchar(255) NOT NULL COMMENT '用户',
+  `user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_cart_user` (`user`) USING BTREE,
-  KEY `fk_cart_book` (`book`) USING BTREE,
-  CONSTRAINT `fk_cart_book` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
-  CONSTRAINT `fk_cart_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='购物车信息';
+  INDEX `fk_cart_user`(`user`) USING BTREE,
+  INDEX `fk_cart_book`(`book`) USING BTREE,
+  CONSTRAINT `fk_cart_book` FOREIGN KEY (`book`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_cart_user` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '购物车信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of cart
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for order
 -- ----------------------------
 DROP TABLE IF EXISTS `order`;
-CREATE TABLE `order` (
-  `id` varchar(255) NOT NULL,
-  `time` datetime NOT NULL COMMENT '订单时间',
-  `buyer` varchar(255) NOT NULL COMMENT '下单者',
-  `address` varchar(255) NOT NULL COMMENT '地址',
-  `receiver` varchar(255) NOT NULL COMMENT '收货人',
-  `price` decimal(10,2) NOT NULL COMMENT '总价',
+CREATE TABLE `order`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `time` datetime(0) NOT NULL COMMENT '订单时间',
+  `buyer` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '下单者',
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '地址',
+  `receiver` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '收货人',
+  `price` decimal(10, 2) NOT NULL COMMENT '总价',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_orderbuy_user` (`buyer`) USING BTREE,
-  KEY `fk_orderrcv_user` (`receiver`) USING BTREE,
-  KEY `fk_order_address` (`address`) USING BTREE,
-  CONSTRAINT `fk_order_address` FOREIGN KEY (`address`) REFERENCES `address` (`id`),
-  CONSTRAINT `fk_orderbuy_user` FOREIGN KEY (`buyer`) REFERENCES `user` (`id`),
-  CONSTRAINT `fk_orderrcv_user` FOREIGN KEY (`receiver`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单信息';
+  INDEX `fk_orderbuy_user`(`buyer`) USING BTREE,
+  INDEX `fk_orderrcv_user`(`receiver`) USING BTREE,
+  INDEX `fk_order_address`(`address`) USING BTREE,
+  CONSTRAINT `fk_order_address` FOREIGN KEY (`address`) REFERENCES `address` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_orderbuy_user` FOREIGN KEY (`buyer`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_orderrcv_user` FOREIGN KEY (`receiver`) REFERENCES `user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '订单信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for orderitem
 -- ----------------------------
 DROP TABLE IF EXISTS `orderitem`;
-CREATE TABLE `orderitem` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `orderitem`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `book` int(11) NOT NULL AUTO_INCREMENT COMMENT '书籍',
-  `count` int(11) NOT NULL DEFAULT '1' COMMENT '数量',
-  `order` varchar(255) NOT NULL COMMENT '订单',
+  `count` int(11) NOT NULL DEFAULT 1 COMMENT '数量',
+  `order` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单',
   PRIMARY KEY (`id`) USING BTREE,
-  KEY `fk_oneorder_order` (`order`) USING BTREE,
-  KEY `fk_oneorder_book` (`book`) USING BTREE,
-  CONSTRAINT `fk_oneorder_book` FOREIGN KEY (`book`) REFERENCES `book` (`id`),
-  CONSTRAINT `fk_oneorder_order` FOREIGN KEY (`order`) REFERENCES `order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+  INDEX `fk_oneorder_order`(`order`) USING BTREE,
+  INDEX `fk_oneorder_book`(`book`) USING BTREE,
+  CONSTRAINT `fk_oneorder_book` FOREIGN KEY (`book`) REFERENCES `book` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_oneorder_order` FOREIGN KEY (`order`) REFERENCES `order` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of orderitem
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sales
 -- ----------------------------
 DROP TABLE IF EXISTS `sales`;
-CREATE TABLE `sales` (
+CREATE TABLE `sales`  (
   `book` int(11) NOT NULL AUTO_INCREMENT COMMENT '书籍',
-  `count` int(11) NOT NULL DEFAULT '0' COMMENT '剩余数量',
-  `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态：0：在售；1：下架；2：预售',
-  `hot` tinyint(1) unsigned DEFAULT '0' COMMENT '热门：0：未知；1：不热门；2：热门，默认0',
+  `count` int(11) NOT NULL DEFAULT 0 COMMENT '剩余数量',
+  `state` tinyint(1) NOT NULL DEFAULT 0 COMMENT '状态：0：在售；1：下架；2：预售',
+  `hot` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '热门：0：未知；1：不热门；2：热门，默认0',
   PRIMARY KEY (`book`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=460 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 460 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sales
 -- ----------------------------
-BEGIN;
 INSERT INTO `sales` VALUES (1, 20, 0, 2);
 INSERT INTO `sales` VALUES (2, 20, 0, 2);
 INSERT INTO `sales` VALUES (3, 200, 0, 2);
@@ -204,6 +218,7 @@ INSERT INTO `sales` VALUES (6, 54, 0, 2);
 INSERT INTO `sales` VALUES (7, 6, 0, 2);
 INSERT INTO `sales` VALUES (8, 454, 0, 2);
 INSERT INTO `sales` VALUES (9, 43, 0, 2);
+INSERT INTO `sales` VALUES (10, 0, 0, 0);
 INSERT INTO `sales` VALUES (11, 65, 0, 2);
 INSERT INTO `sales` VALUES (12, 87, 0, 2);
 INSERT INTO `sales` VALUES (13, 54, 0, 2);
@@ -265,23 +280,21 @@ INSERT INTO `sales` VALUES (68, 0, 0, 0);
 INSERT INTO `sales` VALUES (69, 0, 0, 0);
 INSERT INTO `sales` VALUES (70, 0, 0, 0);
 INSERT INTO `sales` VALUES (71, 0, 0, 0);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for type
 -- ----------------------------
 DROP TABLE IF EXISTS `type`;
-CREATE TABLE `type` (
+CREATE TABLE `type`  (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT 'id，非负整数',
-  `cname` varchar(255) COLLATE utf8_bin NOT NULL COMMENT '中文类型名',
-  `ename` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '英文类型名',
+  `cname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '中文类型名',
+  `ename` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '英文类型名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC COMMENT='书籍类型';
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '书籍类型' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of type
 -- ----------------------------
-BEGIN;
 INSERT INTO `type` VALUES (1, '未分类', 'none');
 INSERT INTO `type` VALUES (2, '其他', 'others');
 INSERT INTO `type` VALUES (3, '文学', 'literature');
@@ -295,28 +308,25 @@ INSERT INTO `type` VALUES (10, '科学', 'science');
 INSERT INTO `type` VALUES (11, '教育', 'education');
 INSERT INTO `type` VALUES (12, '历史', 'history');
 INSERT INTO `type` VALUES (13, '哲学', 'philosophy');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` varchar(255) NOT NULL COMMENT 'id：要求：不允许含任何空格',
-  `name` varchar(255) NOT NULL COMMENT '姓名，要求：不允许含任何空格，包括“”，\\t， \\n， \\r等',
-  `password` varchar(255) NOT NULL COMMENT '密码，要求：不允许含任何空格',
-  `tel` varchar(11) NOT NULL COMMENT '电话，要求：11位手机号码',
-  `authority` tinyint(1) DEFAULT '1' COMMENT '权限，0-管理员；1-顾客，默认1',
+CREATE TABLE `user`  (
+  `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'id：要求：不允许含任何空格',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '姓名，要求：不允许含任何空格，包括“”，\\t， \\n， \\r等',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码，要求：不允许含任何空格',
+  `tel` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '电话，要求：11位手机号码',
+  `authority` tinyint(1) NULL DEFAULT 1 COMMENT '权限，0-管理员；1-顾客，默认1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-BEGIN;
 INSERT INTO `user` VALUES ('10000', 'admin', '123456', '17362447820', 0);
 INSERT INTO `user` VALUES ('10001', 'guest', '123456', '17362447821', 1);
-COMMIT;
 
 -- ----------------------------
 -- Triggers structure for table book
@@ -324,7 +334,6 @@ COMMIT;
 DROP TRIGGER IF EXISTS `ins_add_trigger`;
 delimiter ;;
 CREATE TRIGGER `ins_add_trigger` AFTER INSERT ON `book` FOR EACH ROW INSERT INTO sales(book) VALUES(new.id)
-;
 ;;
 delimiter ;
 
@@ -334,7 +343,6 @@ delimiter ;
 DROP TRIGGER IF EXISTS `ins_update_trigger`;
 delimiter ;;
 CREATE TRIGGER `ins_update_trigger` AFTER UPDATE ON `book` FOR EACH ROW UPDATE sales SET book = new.id WHERE book = old.id
-;
 ;;
 delimiter ;
 
@@ -344,7 +352,6 @@ delimiter ;
 DROP TRIGGER IF EXISTS `ins_delete_trigger`;
 delimiter ;;
 CREATE TRIGGER `ins_delete_trigger` AFTER DELETE ON `book` FOR EACH ROW DELETE FROM sales WHERE book = old.id
-;
 ;;
 delimiter ;
 

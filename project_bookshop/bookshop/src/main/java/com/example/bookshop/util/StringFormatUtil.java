@@ -35,8 +35,7 @@ public class StringFormatUtil {
      * @return 是否是一个合法的11位手机号码
      */
     public static boolean isPhoneNum(String phoneNum) {
-        Pattern phone = Pattern
-                .compile("^[1]([3-9])[0-9]{9}$");
+        Pattern phone = Pattern.compile("^[1]([3-9])[0-9]{9}$");
         if (hasEmpty(phoneNum)) return false;
         return phone.matcher(phoneNum).matches();
     }
@@ -104,5 +103,78 @@ public class StringFormatUtil {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * 将传入的字符串数组转成SQL需要的数组形式
+     * @param arr 字符串数组
+     * @return SQL需要的数组形式
+     */
+    public static String StrArrToSqlIn(String[] arr) {
+        if (arr == null || arr.length == 0) return null;
+
+        StringBuilder buffer = new StringBuilder();
+        for (String s : arr) {
+            buffer.append("'").append(s).append("'").append(",");
+        }
+
+        return buffer.toString().substring(0, buffer.length() - 1);
+    }
+
+    /**
+     * 将int数组转换成SQL需要的数组
+     * @param arr int数组
+     * @return SQL数组
+     */
+    public static String intArrToSqlIn(int[] arr) {
+        if (arr == null || arr.length == 0) return null;
+
+        StringBuilder buffer = new StringBuilder();
+        for (int i : arr) {
+            buffer.append(i).append(",");
+        }
+        return buffer.toString().substring(0, buffer.length() - 1);
+    }
+
+    /**
+     * 将double[][2]数组转成SQL语句需要的字符串
+     * 例如将price在区间为[20,30],[100,200]的转成 price BETWEEN 20.0 AND 30.0 OR price BETWEEN 100.0 AND 200.0
+     * @param arr 查找的范围区间
+     * @param attribute 查找的属性
+     * @return 转成的SQL语句
+     */
+    public static String doubleArrToSqlRangeIn(double[][] arr, String attribute) {
+        if (arr == null || arr.length == 0 || attribute == null || attribute.length() == 0)
+            return null;
+
+        StringBuilder buffer = new StringBuilder();
+        for (double[] one : arr) {
+            buffer.append(attribute).append(" BETWEEN ").append(one[0]).append(" AND ").append(one[1]).append(" OR ");
+        }
+        return buffer.toString().substring(0 ,buffer.length() - 4);
+    }
+
+    /**
+     * 将格式为{"num1,num2","num3,num4"}类型的一维数组转换成{{num1, num2}, {num1, num2}}的double类型的数组
+     * @param arr 一维字符串类型的数组，中间以 , 切分
+     * @return 切分后的double类型的二维数组
+     */
+    public static double[][] splitWebStrArr(String[] arr) {
+        double[][] result = new double[arr.length][];
+        for (int i = 0; i < arr.length; i++) {
+            String[] strArr = arr[i].split("a");
+            double[] one = new double[] {Double.parseDouble(strArr[0]), Double.parseDouble(strArr[1])};
+            result[i] = one;
+        }
+        return result;
+    }
+
+    /**
+     * 将输入字符串前后加上%
+     * @param str 输入字符串
+     * @return %str%
+     */
+    public static String addLikeSymbol(String str) {
+        return "%" + str + "%";
     }
 }

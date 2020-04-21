@@ -4,16 +4,15 @@ import com.example.bookshop.domain.Book;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.UserService;
 import com.example.bookshop.util.ReturnMsgUtil;
-import com.example.bookshop.util.SecurityUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Alu
@@ -21,14 +20,16 @@ import java.util.List;
  */
 @RestController
 public class HomeController {
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    BookService bookService;
+    final UserService userService;
+    final BookService bookService;
 
     private static int successCode = 0;
     private static int failCode = 1;
+
+    public HomeController(UserService userService, BookService bookService) {
+        this.userService = userService;
+        this.bookService = bookService;
+    }
 
     /**
      * 登录
@@ -44,7 +45,8 @@ public class HomeController {
         } catch (Exception e) {
             return new ReturnMsgUtil(failCode, e.getMessage());
         }
-        return new ReturnMsgUtil(successCode, String.valueOf(SecurityUtil.getAuthority()));
+        //return new ReturnMsgUtil(successCode, String.valueOf(SecurityUtil.getAuthority()));
+        return new ReturnMsgUtil(successCode, String.valueOf(userService.getAuthorityById(id)));
     }
 
     /**
@@ -52,18 +54,17 @@ public class HomeController {
      * @return 书籍清单
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView getHomeBookList() {
-        ModelAndView modelAndView = new ModelAndView("/index");
+    public Map<String, List<Book>> getHomeBookList() {
+        Map<String, List<Book>> result = new HashMap<>();
         //轮播视图 返回五本书
-        modelAndView.addObject("carousel", bookService.getCarouselBooks());
+        result.put("carousal", bookService.getCarouselBooks());
         //畅销排行
-        modelAndView.addObject("rank", bookService.getBestseller());
+        result.put("rank", bookService.getBestseller(10));
         //热门/猜你喜欢
-        modelAndView.addObject("hot", bookService.getHighScoreBooks(0));
+        result.put("hot", bookService.getHighScoreBooks(0));
         //各类别书籍
-        modelAndView.addObject("type", bookService.getBooksByType());
-
-        return modelAndView;
+        result.putAll(bookService.getHomePageGroupByType(4));
+        return result;
     }
 
     /**
@@ -72,7 +73,7 @@ public class HomeController {
      * @return 另外四本书籍
      */
     @RequestMapping(value = "/index/another", method = RequestMethod.GET)
-    public List<Book> getAnotherFourBooks(int index) {
+    public List<Book> getAnotherFourBooks(@RequestParam("index") int index) {
         return bookService.getHighScoreBooks(index);
     }
 }

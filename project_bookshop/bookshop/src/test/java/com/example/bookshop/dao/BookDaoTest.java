@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Year;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -159,6 +160,58 @@ public class BookDaoTest {
 
     @Test
     public void getBestseller() {
-        System.out.println(bookDao.getBestseller());
+        System.out.println(bookDao.getBestseller(5));
+    }
+
+    @Test
+    public void getHighScoreBooks() {
+        System.out.println(bookDao.getHighScoreBooks(0));
+    }
+
+    @Test
+    public void getBookCount() {
+        System.out.println(bookDao.getBookCount());
+    }
+
+    @Test
+    public void getBooksByType() {
+        System.out.println(bookDao.getBooksByType());
+    }
+
+    @Test
+    public void getCountries() {
+        System.out.println(bookDao.getCountries());
+    }
+
+    @Test
+    public void findBooksByNation() {
+        //String[] nations = new String[]{"中国", "美国", "英国"};
+
+    }
+
+    @Test
+    public void findScoreRangeIn() {
+    }
+
+    @Test
+    public void findByLikeName() {
+        String name = "%平%";
+        System.out.println(bookDao.findByLikeName(name));
+
+    }
+
+    @Test
+    public void findByTypes() {
+        //int[] types = new int[] {3, 2};
+        String type = "3,4,5,6";
+        List<Book> result = bookDao.findByTypes(type);
+        System.out.println(result);
+        System.out.println(result.size());
+    }
+
+    @Test
+    public void findRangeInDoubleArr() {
+        String str = " price BETWEEN 20 AND 30 OR price BETWEEN 100 AND 200";
+        System.out.println(bookDao.findRangeInDoubleArr(str));
     }
 }

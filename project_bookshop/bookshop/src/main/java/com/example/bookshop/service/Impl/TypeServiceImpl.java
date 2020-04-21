@@ -97,4 +97,19 @@ public class TypeServiceImpl implements TypeService {
 
         return typeDao.findOneByName(name);
     }
+
+    @Override
+    public int[] getTypeIds() {
+        return typeDao.getTypeIds();
+    }
+
+    @Override
+    public String getENameById(Serializable id) {
+        return typeDao.getENameById(id);
+    }
+
+    @Override
+    public String getCNameById(Serializable id) {
+        return typeDao.getCNameById(id);
+    }
 }

@@ -52,4 +52,11 @@ public interface UserDao extends BaseDao<User> {
     @Select("SELECT * FROM user")
     List<User> findAll();
 
+    /**
+     * 通过id获取用户权限
+     * @param id id
+     * @return 用户权限
+     */
+    @Select("SELECT authority FROM user WHERE id = #{id}")
+    int getAuthorityById(Serializable id);
 }

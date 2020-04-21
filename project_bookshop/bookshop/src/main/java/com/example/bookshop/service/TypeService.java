@@ -31,4 +31,10 @@ public interface TypeService extends BaseService<Type> {
     int getTypeCount();
 
     Type findOneByName(String name);
+
+    int[] getTypeIds();
+
+    String getENameById(Serializable id);
+
+    String getCNameById(Serializable id);
 }

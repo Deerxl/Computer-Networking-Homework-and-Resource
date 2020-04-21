@@ -7,11 +7,7 @@ import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.service.SalesService;
 import com.example.bookshop.util.ReturnMsgUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,10 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/book")
 public class BookController implements BaseController<Book>{
-    @Autowired
-    private BookService bookService;
-    @Autowired
-    private SalesService salesService;
+    private final BookService bookService;
+    private final SalesService salesService;
+
+    public BookController(BookService bookService, SalesService salesService) {
+        this.bookService = bookService;
+        this.salesService = salesService;
+    }
 
     /**
      * 添加书籍 URL: /book/add
@@ -30,7 +29,7 @@ public class BookController implements BaseController<Book>{
      * @return 返回ReturnMsgUtil对象，(state, message)
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ReturnMsgUtil add(Book book) {
+    public ReturnMsgUtil add(@RequestBody Book book) {
         try {
             bookService.add(book);
             return new ReturnMsgUtil(successCode, String.valueOf(book.getId()));
@@ -60,7 +59,7 @@ public class BookController implements BaseController<Book>{
      * @return 返回ReturnMsgUtil对象，(state, message)
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public ReturnMsgUtil update(Book book) {
+    public ReturnMsgUtil update(@RequestBody Book book) {
         try {
             bookService.update(book);
             return new ReturnMsgUtil(successCode, "success");

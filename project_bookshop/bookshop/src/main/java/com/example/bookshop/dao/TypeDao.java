@@ -45,4 +45,18 @@ public interface TypeDao extends BaseDao<Type> {
      */
     @Select("SELECT FROM type WHERE cname = #{name} OR ename = #{name}")
     Type findOneByName(String name);
+
+    /**
+     * 获取所有的type的键
+     * @return type的所有键
+     */
+    @Select("SELECT id FROM type")
+    int[] getTypeIds();
+
+
+    @Select("SELECT ename FROM type WHERE id = #{id}")
+    String getENameById(Serializable id);
+
+    @Select("SELECT cname FROM type WHERE id = #{id}")
+    String getCNameById(Serializable id);
 }
