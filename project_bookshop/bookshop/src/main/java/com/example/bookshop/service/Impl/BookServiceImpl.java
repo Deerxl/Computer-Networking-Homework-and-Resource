@@ -8,18 +8,22 @@ import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.BookService;
 import com.example.bookshop.util.StringFormatUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookServiceImpl implements BookService {
-    @Autowired
-    private BookDao bookDao;
-    @Autowired
-    private TypeDao typeDao;
+    private final BookDao bookDao;
+    private final TypeDao typeDao;
+
+    public BookServiceImpl(BookDao bookDao, TypeDao typeDao) {
+        this.bookDao = bookDao;
+        this.typeDao = typeDao;
+    }
 
     /**
      * 添加书籍。检查书籍是否为空、id/书名/价格/作者是否为空，id是否已被注册，手机号格式、图片地址、价格范围等是否正确
@@ -54,7 +58,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(Serializable id) throws DeleteException {
-        if (id == null) {
+        if (id == null || bookDao.findOneById(id) == null) {
             throw new DeleteException("删除书籍错误：书籍为空");
         }
 

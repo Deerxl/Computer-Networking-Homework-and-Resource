@@ -6,7 +6,6 @@ import com.example.bookshop.exception.DeleteException;
 import com.example.bookshop.exception.UpdateException;
 import com.example.bookshop.service.UserService;
 import com.example.bookshop.util.ReturnMsgUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
@@ -15,8 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController implements BaseController<User> {
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     /**
      * 增加用户 URL: /user/add

@@ -2,8 +2,6 @@ package com.example.bookshop.controller;
 
 import com.example.bookshop.domain.Book;
 import com.example.bookshop.service.BookService;
-import com.example.bookshop.service.TypeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
